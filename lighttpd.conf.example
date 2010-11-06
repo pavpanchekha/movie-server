@@ -4,7 +4,7 @@ server.modules              = (
             "mod_accesslog",
             "mod_compress",
 )
-server.document-root       = "/home/pavpanchekha/www/"
+server.document-root       = "/var/www"
 server.port = 8080
 
 server.modules   += ( "mod_fastcgi" )
@@ -12,7 +12,7 @@ server.modules   += ( "mod_rewrite" )
 
 fastcgi.server = ( "/movies/" =>
  (( "socket" => "/tmp/fastcgi.socket",
-    "bin-path" => "/home/pavpanchekha/www/home.py",
+    "bin-path" => "/var/www/movies/home.py",
     "max-procs" => 1,
    "bin-environment" => (
      "REAL_SCRIPT_NAME" => ""
