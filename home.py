@@ -44,7 +44,7 @@ class index(object):
                     break
             else:
                 assert False, "No module can handle `%s` type" % type
-        return self.GET()
+        return web.seeother("/")
 
 if __name__ == "__main__":
     app.run()
