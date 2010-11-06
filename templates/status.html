@@ -1,10 +1,10 @@
-$def with (movie, is_playing)
+$def with (item, is_playing)
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf8">
     <meta name="viewport" content="initial-scale: 0.5; user-scalable=0;" />
-    <title>$movie.title</title>
+    <title>$item['title']</title>
     <script src="http://hyphenator.googlecode.com/svn/trunk/Hyphenator.js"></script>
     <script>Hyphenator.run();</script>
     <style>
@@ -19,8 +19,8 @@ background: black;
 }
 
 body {
-width: 430px;
-height:640px;
+width: 340px;
+height:480px;
 background: white;
 position: relative;
 }
@@ -29,7 +29,6 @@ position: relative;
 h1 {
 text-align: center;
 padding: 3px;
-margin-bottom: 1em;
 }
 
 hr {
@@ -65,36 +64,53 @@ background: #eee;
 
 #cover {
 float: left;
-margin: 0 10px;
+margin: 0 5px 0 2px;
 }
 
 p.summary {
 text-align: justify;
-margin-top: .5em;
 font-size: 16pt;
-padding: 20px;
-clear: both;
+padding-right: 2px;
 }
 
 #rating {
 text-align: center;
+clear: both;
+margin-top: 3em;
+}
+
+table {
+width: 80%;
+margin: 0 10%;
+}
+
+td {
+text-align: right;
+}
+
+th {
+text-align: left;
 }
     </style>
   </head>
   <body>
-    <h1>$movie.title ($movie.year)</h1>
-    <img id="cover" src="data:image/jpg;base64,$movie.thumbnail" alt="$movie.title" width="150px" />
+    <h1>$item["title"]</h1>
+    <img id="cover" src="$item['image']" alt="$item['title']" width="125px" />
+    <p class="summary hyphenate">
+      $:item["description"]
+    </p>
     <div id="rating">
-$for i in range(movie.rating):
+$for i in range(item["rating"]):
         <img src="data:image/png;base64,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" height="24px" alt="*" />
-$for i in range(movie.rating, 5):
+$for i in range(item["rating"], 5):
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9oLBRUQD//vOpEAAAWdSURBVFjD7VdLiBvJGf6qn2q9NZLsaDzkMsZZjMl1YS8eAjnksskekiVLgiEksJBDbmsbZhwhCXYPIRDYPewhi0muSU5h84QoIUtMjMGxJxCDX2M0tmcstV7V3VXVVV17kcSMZjTj2Rz2kPxQFLT+/r/v//t/iWit8XmKgc9Z/k/AWvTDxsbGa4SQSwC+obXOEkIUgEcAPkqS5FetVmt7qru+vp4ihLxOCPkOgLWJY4oQckNr/QvDMH5Tr9ejw3DIfBKur69nDMP4wLKsb5XLZTefzxuO4yBJEjDGQCmNfN9PlFLvGobxnlLqrGEYHxcKhWqhUMil02kAgNYalFIMBgNKKaUA3mo0Gn85ksDVq1dtx3E+yWazX15ZWXEdx4HneUin04jjGHEcg1IKpRSeP38e9Pv9Z7Zt11ZWVtK2bRPP82CaJhzHgZQSSikIIUApxfb2diSlvNZoNH6ykMC1a9c+yufzb545cyZdKpVQqVQAAEmSQGs9uyml8H0fjDHYtg3LslAul0EIwdTeVFcphfF4DM45Hj16FCql3m40Gr88QGBjY+NLpmn+69y5c26xWESpVNoHOn8YY+h0Okin06hWqwt1AUApBUophBB4/PgxNQxjpV6vD/clISHknUqlYpqmiWw2CyHEzGiSJPu8mhpeXl4GgJnuVH+aA3t1CSGwbRu5XM4aj8dXAFydr4Kv5nI5y3VdCCEWer4X4DCw+TPNmzAM4bouisViilL65pQA0Vrj+vXr5MGDB+z8+fOO53lwHGcfwLzni4CTJEEcx+CcQwgxc2RW85aFQqGAhw8fSsMwUvV6XVkAcP/+fdc0TRBCZpk7DzYlcVh4OeeglCKO432A87LnHZ1KpcisE7ZaLaa19qWUEELMSi6OY0yfSSkhpTzw3Pd99Ho9cM6PBAeAbDYLxhgA/PvKlStyPgc2hRBfcBznUC/nwy2lxHg8PhZ0KqZpwvM8jEYjpbX+04FWTAj5B2PsKwAMy7Kwtz/Mg3POwRjDy45ywzBQqVQgpUQQBBGAPx8YRlrr3/q+zz3PA+ccSikopWahl1KCMYbRaIQoik4MrpRCr9cTcRy3m83mHw8QaDQa/+Scf7izs8M8zwNjDEIIMMYQhiEopYii6KVDvhc8SRIEQYDBYDBMkuS7C8exaZqXfd/fZoxpx3EQBAEYY8dm96JvXq1WIaUE5xy7u7uh1vqNVqs1WEigXq8LrfUb29vboWmaKJVKIISceMbbto1Tp05BCAHOOZ4+fRoqpb7fbDY/OXYcT0byq5Zl/WF5eTnvOA7p9/svHYFUKoWlpSVEUQTOOXZ2dgKl1DebzebvXmof2EPinGmaf6tWq+VcLmcNBgNIKY8Ez2QyKBQKCMMQjDG8ePGCJknytUaj8fdF75Cjsvny5cvLruv+tVgsfrFcLjuj0QhCiEN18/k8stksgiBAGIa62+3Sfr//9bt3794EELXbbXUiAmtrawYAr1arnV5dXf11JpN55fTp06koiqbdbCalUgme54FSiiAIkl6vN3ry5MlbW1tb/wEQAQgBBIeRMI7ZF+1nz57xmzdvfns4HP6+0+kwx3EwXbumZea6LiiloJSqbrfr37t373tbW1vPATgA7MntfNatWHPO5Y0bN37c7XZ/1ul0eJIkyGQyKJfLME0TYRhiOBzKbre7s7m5+fbu7u7uvA0A8sQ5sLa2lgaQBuBNTurs2bOv1mq1ny4tLXm5XM5MkgT9fl8Mh8Mnd+7c+RGl1AfAJ6Fnk3vcbrfDExOYkHCn4ABcAE6tVltZXV39eS6XW06SBOPxePP27ds/DMMwABADEBMSDMCo3W7Lz1QFc0TMyXdMAbALhUL6woUL7xNCnFu3bv0giqJ4EmYxARbtdvv45nHUOnXcuXjxIrl06ZL539gg//P/jj8F7GVb07u3koAAAAAASUVORK5CYII=" height="24px" alt="." />
 $# End
     </div>
-        
-    <p class="summary hyphenate">
-      $:movie.summary
-    </p>
+    <table>
+$for key, value in item['meta'].items():
+        <tr><th>$key.title()</th><td>$value</td></tr>
+$# End
+    </table>
     <form id="controls" method="post" action="/">
       <button name="action" value="stop"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABN0RVh0VGl0bGUAT3B0aWNhbCBEcml2ZT5nugwAAAEOUExURf///wAAACQkJAAAAAAAAC4uLjs7OwAAAB4eHgAAACsrKwAAACQkJDExMeDg4Lm5uf///9LS0r29vdzc3OLi4tzc3ODg4Pz8/Pv7+////////7y/uL3AuJqdmaWmoomLhoyOiI6Qi5CSjZKVj5WXkZeZlJmclpyemJ6gm6CjnaOln6WnoaeqpKqspqyvqK6xqrGzrbO2r7W4sbe6tLq9ttTY0NTY0dba0tfa09jc1drd1tve19zf2d3g2t/h29/i3OHj3uHk3+Tl4eTm4ebn5Obo5Ojq5unq5urs6evs6e3u6+7u7O/w7fHy8PP08vb39fj59/r7+vv7+/z8+/z8/Pz9/P39/P39/f7+/v///2aSQUIAAAAfdFJOUwAHBwkKCw0PERISExUVGSgpLTI6RkhJYnd8f7Cxw9fOxu03AAAA2UlEQVRIx+2UOxLCMAxEV44hM1CShgNw/2tRQAEz/JJgUcCALS+IHrayM+9JigsB//xGJD9PA2VSr1SQ2XhVVrOJR2VCi25JO6w3enle4ut7GJYrPvdhpAIE2Kd0TfdoeKRDm82R/6YoCC9QabgABeEDFPJWIHxA8XS2Q81/IxS8+ELJ+4LhXcHynlDxjlDz8aNA+M8C478Ryvq+YOZxBVvfEwzvCpZPjlDxToeaN0IshS6/CgQNzCvla6ZZ8EWmQ79lHfr5aSLUwPA6ZvsAY4wUT+cd/vm53ADhFqi0NvbNRwAAAABJRU5ErkJggg==" height="48px" alt="Stop" /></button>
 $if is_playing:

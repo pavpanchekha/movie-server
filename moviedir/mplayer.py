@@ -1,6 +1,5 @@
 import subprocess
 import os
-import config
 
 import cPickle as pickle
 
@@ -9,16 +8,17 @@ FIFO="mplayer.fifo"
 STATE="mplayer.pickle"
 
 class MPlayer(object):
-    def __init__(self):
+    def __init__(self, dir):
+        self.dir = dir
         if os.path.exists(STATE):
             self.state = pickle.load(open(STATE, "rb"))
         else:
-            self.state = {"playing": False, "movie": "Fight Club.mp4"}
+            self.state = {"playing": False, "movie": None}
             self.sync_state()
 
     def sync_state(self):
         pickle.dump(self.state, open(STATE, "wb"))
-    
+
     def make_fifo(self):
         if os.path.exists(FIFO):
             self.rm_fifo()
@@ -33,16 +33,12 @@ class MPlayer(object):
         self.state["movie"] = f
         self.state["playing"] = True
         self.make_fifo()
-        subprocess.Popen([MPLAYER, "-fs", "-slave", "-input", "file="+os.path.abspath(FIFO), os.path.abspath(os.path.join(config.MOVIE_DIR, f))], stderr=open("/dev/null"), stdout=open("/dev/null"))
+        subprocess.Popen([MPLAYER, "-fs", "-idle", "-slave", "-really-quiet", "-input", "file="+os.path.abspath(FIFO), os.path.abspath(os.path.join(self.dir, f))], stderr=open("/dev/null"), stdout=open("/dev/null"))
         self.sync_state()
 
     def send_command(self, cmd):
         with open(FIFO, "w") as f:
             f.write(cmd + "\n")
-
-    def notstart(self, f):
-        self.start(f)
-        self.pause()
 
     def pause(self):
         assert self.state["playing"], "Attempting to pause paused movie"
