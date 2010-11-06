@@ -33,21 +33,14 @@ class MovieDir(object):
 
         library = [os.path.join(self.dir, file) for file in os.listdir(self.dir)]
         library = [Movie(self.dir, os.path.split(x)[-1]) for x in library if os.path.isfile(x)]
-        return sorted({"id": mov.f,
+        return sorted([{"id": mov.f,
                        "title": mov.title,
                        "description": mov.summary,
                        "rating": mov.rating,
                        "image": mov.thumbnail,
-                       "meta": {"duration": mov.duration[1]}} for mov in library)
+                       "meta": {"duration": mov.duration[1]}} for mov in library], key=lambda x: x["title"])
 
-    def pause(self):
-        self.mplayer.pause()
-
-    def play(self):
-        self.mplayer.play()
-
-    def stop(self):
-        self.mplayer.stop()
-
-    def start(self, id):
-        self.mplayer.start(id)
+    def pause(self): self.mplayer.pause()
+    def play(self): self.mplayer.play()
+    def stop(self): self.mplayer.stop()
+    def start(self, id): self.mplayer.start(id)
