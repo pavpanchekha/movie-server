@@ -4,8 +4,8 @@ import os
 import cPickle as pickle
 
 MPLAYER="/usr/bin/mplayer"
-FIFO="mplayer.fifo"
-STATE="mplayer.pickle"
+FIFO="/tmp/mplayer.fifo"
+STATE="/tmp/mplayer.pickle"
 
 class MPlayer(object):
     def __init__(self, dir):
@@ -33,7 +33,7 @@ class MPlayer(object):
         self.state["movie"] = f
         self.state["playing"] = True
         self.make_fifo()
-        subprocess.Popen([MPLAYER, "-fs", "-idle", "-slave", "-really-quiet", "-input", "file="+os.path.abspath(FIFO), os.path.abspath(os.path.join(self.dir, f))], stderr=open("/dev/null"), stdout=open("/dev/null"))
+        subprocess.Popen([MPLAYER, "-fs", "-zoom", "-display", ":0.0", "-idle", "-slave", "-input", "file="+os.path.abspath(FIFO), os.path.abspath(os.path.join(self.dir, f))], stderr=open("/dev/null"))
         self.sync_state()
 
     def send_command(self, cmd):

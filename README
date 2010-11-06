@@ -1,4 +1,16 @@
-Before starting to use this program, create a file called
-``config.py`` containing the following::
+Movie-Server 0.5
+================
 
-    MOVIE_DIR = "/path/to/movie/dir"
+Movie-server is a simple tool for armless computers to server movies.
+Despite the name, movie-server is in fact capable of more than simply
+serving movies --- any number of modules can provide
+mutually-exclusive media sources, and movie-server will present them
+to you. To configure these media sources, create a file called
+``config.py``; an example file would be::
+
+    from moviedir import MovieDir
+
+    MODULES = [MovieDir("/var/movies")]
+
+Any number of modules can be configured in the same way.
+

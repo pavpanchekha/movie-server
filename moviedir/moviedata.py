@@ -32,7 +32,10 @@ class Movie(object):
     @property
     def duration(self):
         import subprocess
-        proc = subprocess.Popen(["ffprobe", os.path.join(self.dir, self.f)], stderr=subprocess.PIPE)
+        try:
+            proc = subprocess.Popen(["ffprobe", os.path.join(self.dir, self.f)], stderr=subprocess.PIPE)
+        except:
+            return 0, "??:??"
         proc.wait()
         _, data = proc.communicate()
         duration_line = [line for line in data.split("\n") if "Duration" in line][0]

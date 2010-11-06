@@ -37,7 +37,6 @@ class index(object):
                 break
         else:
             assert action in ("none", "start"), "Attempted action on not playing file"
-            print web.input().file
             type, id = web.input().file.split(":", 1)
             for mod in config.MODULES:
                 if mod.title == type:
