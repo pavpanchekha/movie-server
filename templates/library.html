@@ -1,0 +1,107 @@
+$def with (library)
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0; user-scalable=0;" />
+    <title>Media Library</title>
+    <script src="http://hyphenator.googlecode.com/svn/trunk/Hyphenator.js"></script>
+    <script>Hyphenator.run();</script>
+    <style>
+* {
+margin: 0;
+padding: 0;
+}
+
+@media all and (min-width: 500px) {
+html {
+background: black;
+}
+
+body {
+width: 430px;
+height:640px;
+background: white;
+}
+}
+
+body {
+position: relative;
+}
+
+div.movie {
+margin: 10px 10px;
+padding: 10px 0;
+border-top: 1px solid gray;
+min-height: 260px;
+}
+
+div.movie form {
+float: left;
+margin-right: 10px;
+position: relative;
+height: 267px;
+width: 182px;
+}
+
+div.movie form button.start {
+position: absolute;
+bottom: 2px;
+right: 2px;
+}
+
+div.movie form button.notstart {
+position: absolute;
+bottom: 2px;
+left: 2px;
+}
+
+div.movie p.summary {
+text-align: justify;
+margin-top: .5em;
+font-size: 14pt;
+}
+
+#rating {
+text-align: center;
+}
+
+div.movie table {
+width: 215px;
+margin-top: 1em;
+}
+
+div.movie th {
+text-align: left;
+}
+
+div.movie td {
+text-align: right;
+font-style: italic;
+}
+    </style>
+  </head>
+  <body>
+$for movie in library:
+    <div class="movie">
+      <form method="post" action="/">
+        <input type="hidden" name="file" value="$movie.f" />
+        <img class="cover" src="data:image/jpg;base64,$movie.thumbnail" width="100%"/>
+        <button class="notstart" name="action" value="notstart"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABN0RVh0VGl0bGUAT3B0aWNhbCBEcml2ZT5nugwAAAEXUExURf///wAAACQkJAAAAAAAAC4uLjs7OwAAAB4eHgAAACsrKwAAACQkJC4uLtjY2Ly8vP///9nZ2by8vODg4Obm5t/f3+Dg4Pz8/P39/f///////7u+t7y/uLy/ub7AuZialpqbl6OkoImLhoyOiI6Qi5CSjZKVj5WXkZeZlJmclpyemJ6gm6CjnaOln6WnoaeqpKqspqyvqK6xqrGzrbO2r7W4sbe6tLq9ttTY0NTY0dba0tfa09jc1drd1tve19zf2d3g2t/h29/i3OHj3uHk3+Tl4eTm4ebn5Obo5Ojq5unq5urs6evs6e3u6+7u7O/w7fHy8PP08vb39fj59/r7+vv7+/z8+/z8/Pz9/P39/P39/f7+/v///y84K0QAAAAidFJOUwAHBwkKCw0PERISExUWGioqLzU6RkhJY3d8f7e3t7fJydojtvW4AAABG0lEQVRIie2UwW7CMAyGbTcbEruW7QBX3v+lJiZt2mEbm6CUeHbTCDeNiHIGn/yp/xfHlVqAe91Goe0fKTS+4znOBVz25+EJNu6PU8wIC1itQ7f74KNguwn49i4Yy10EOq23Y7vvj4KbiD99VtBp396f/QssMOArSbUB47FWYNC8B8YmoOZxxIwAIkhehLDaICBFzAqaVwGigETANpNOSATJVwkYdqiYIPmywJMdygKT3aEsMBkBywJTKrirguangrsuUCpIvkoYzq8Qwn1qhOH8koAXQdNFAc0EzfuCgPZKmi9MwMkOmk8ENxXaePToQwPJW7K/mWY1frt86D4Fn8lgZkL39PsQ/ZPi3mIs8z+A3o26P3zN8V43Vv8nGs2leCACCAAAAABJRU5ErkJggg==" height="64px" alt="Load" /></button>
+        <button class="start" name="action" value="start"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABN0RVh0VGl0bGUAT3B0aWNhbCBEcml2ZT5nugwAAALZUExURf///wAAAP///wAAAP///wAAAAAAAP///wAAAAAAAAAAAP///wAAAAAAAAAAAP///wAAAP///wAAAAAAACcnJ05OTgAAAElJSQAAAERERO7u7gAAABAQEDAwMEBAQAAAAAAAAFVVVaqqqigoKF5eXv///y4uLnp6ev///////4yUjPf39////5SUjbm5ufn5+ZKXjaysp/r6+vr6+vv7+9TU1K6uqvv7++bm5vv7+6irpP////z8/Pn5+f///56hm7a5s/////39/bq8t/////////////j4+P///7C0rv////////////////39/f////39/fn7+fX19fX19bq8t6Kin/Dw7qippOnp5+Pj4dbW1N3d3L2+uc7PzMjKx7a4tbe6ssXGw7K0r7GzsKyvqK+wrZyemrGyrpqbl73AuqKlnr2/uJuembm7tXt9eJ6gnIaIgq+xq6Oln4qLhr3AuqSnoZCSjLy/uHd5dJeZk7O1r6ytqH6Aeqeoo7m7tbq7tszQyru+uMHDvczPyYmKhczOytvc2ZOUkJaYk5iZlaOmoKSloKqsqLa4tNLT0IKEfri6tr6/u8/QzcjKx9/h3dfY1t3f2+Hi4OTl4+3t6+3t7O7u7WttZ21vaXFzbXR2cHh6dHx+eH+Be4OFf4eJg4qMho6QipGUjZWYkZmblZyfmKCjnKSmoKeqo6uup6+yq7K1rra5srq9ttTY0NTY0dba0tba09fa09jc1drd1tve19zf2d3g2t7h29/h29/i3OHj3uHk3+Tl4eTm4eXn4ubn5Obo5Ofo5Ofp5Ojq5unq5urr6ers6evr6uvs6Ovs6ezt6+zu6+3u6+/w7fDx7vDx7/Hx8PHy8PHz8PLz8fPz8vP08vT18/X18/X19Pb39fb39vf39vf49vf49/j49/j59/j5+Pr6+fr7+vv7+vv7+/v8+/z8/Pz9/P39/P39/f3+/f7+/v///2saRPgAAACcdFJOUwABAQICAwQEBQYHBwgJCgoLCwwNDQ0ODg8PDxAQEBAREhISExMUFhcZGx8hISYoKTExMTc6Ozw/RkdJTVBUVVdXXWZnamxvcnV3eHl7fX5/gIKEhYaHh4mLkJSXmpujqKmrsLG7u7/EysrLzNTX2d3j4+Xq6+zx8vT19fb39/f39/j4+Pn5+fr6+vr6+vr6+/v7+/z8/f3+/v7+/kMEiDYAAAH7SURBVEjH7ZVfT9NQHIbP2ro/nWdjXQkOovFS4HOod3LtnRfGC2Ni9OMYIqgYQb+BH0DcJKFMCMOhoLB13fq/K21pT49zhAQWup5dGG7o9fOkb8/vd94yYMSHuRL+t0DDfNc6HkHo8WloGohYGDMfSgLMKRbxNwT3N2+vVbmc4hIKKfBMW5j+Kt6wdEQkUACg5x9LP775N1ULkx2rod/NLU+tbRSgdkQgYOD73WtzwdJMeX/c0XwSAYVODT75w+9VgindwLECCkMUamrp6afJdSGfV7pxwj8+RLip3mMX7pR3itfV4xihz1M02oePFThT7kwOjP6iSD2eomi3zr9YmditDIz+gkgnPEVRhvcg+fZW5TuXU50hkU55mqYTSuaRPT/7pTnRPoqMdIZPJhhssC9XirXVQqRwnmeYJJNIQMjZkZEG+DRrLzYks1SPFM7xqSz1RmypwBV/Rb/hDA8zH/Q9OQgkIQDDI/X5TEF6d9g7HWVLGza4Uz49hhcbLQNY4vbw1TjhKS67pP2WQ68thDHL1+ezxZ+fG7KDO1U7dr17fGbcmxfbJjAP6wQXiE7x7HtJVLAjbRBdUY5fdndUD3UEDxAJ4SuxbQNtt0lWxvh1S9SBLW6RFlnVlZEvrYeEVWkVKzwtbxrEZayyyOjURqh7fHBw9Re9JOEvGJEPYjOsAaUAAAAASUVORK5CYII=" height="64px" alt="Play" /></button>
+      </form>
+      <h2>$movie.title ($movie.year)</h2>
+      <div id="rating">
+    $for i in range(movie.rating):
+        <img src="data:image/png;base64,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" height="24px" alt="*" />
+    $for i in range(movie.rating, 5):
+        <img src="data:image/png;base64,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" height="24px" alt="." />
+    $# End
+      </div>
+      <p class="summary hyphenate">$:movie.summary</p>
+      <table>
+        <tr><th>Duration</th><td>$movie.duration[1]</td></tr>
+      </table>
+    </div>
+  </body>
+</html>

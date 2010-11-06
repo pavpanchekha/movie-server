@@ -1,0 +1,4 @@
+Before starting to use this program, create a file called
+``config.py`` containing the following::
+
+    MOVIE_DIR = "/path/to/movie/dir"
