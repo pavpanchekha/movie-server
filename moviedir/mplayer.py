@@ -5,7 +5,7 @@ import cPickle as pickle
 
 MPLAYER="/usr/bin/mplayer"
 FIFO="/tmp/mplayer.fifo"
-STATE="/tmp/mplayer.pickle"
+STATE="/tmp/mplayer.pickle.2"
 
 class MPlayer(object):
     def __init__(self, dir):

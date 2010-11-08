@@ -1,0 +1,23 @@
+@media all and (min-width: 500px) {
+html {
+background: black;
+}
+
+body {
+width: 340px;
+height:480px;
+background: white;
+position: relative;
+}
+}
+
+#controls {
+text-align: center;
+border-top: 1px solid gray;
+position: absolute;
+bottom: 0px;
+left: 0;
+width: 100%;
+background: #eee;
+height: 80px;
+}

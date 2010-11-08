@@ -44,7 +44,7 @@ class MPDaemon(object):
 
         return sorted([{"id": playlist,
                         "title": playlist.title().replace("-", " "),
-                        "image": "",
+                        "image": None,
                         "description": "",
                         "rating": None,
                         "meta": {}} for playlist in playlists], key=lambda x: x["title"])

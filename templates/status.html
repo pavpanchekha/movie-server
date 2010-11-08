@@ -5,47 +5,11 @@ $def with (item, is_playing)
     <meta charset="utf8">
     <meta name="viewport" content="initial-scale: 0.5; user-scalable=0;" />
     <title>$item['title']</title>
+    <link rel="stylesheet" href="/static/main.css" />
+    <link rel="stylesheet" href="/static/status.css" />
     <script src="http://hyphenator.googlecode.com/svn/trunk/Hyphenator.js"></script>
     <script>Hyphenator.run();</script>
     <style>
-* {
-margin: 0;
-padding: 0;
-}
-
-@media all and (min-width: 500px) {
-html {
-background: black;
-}
-
-body {
-width: 340px;
-height:480px;
-background: white;
-position: relative;
-}
-}
-
-h1 {
-text-align: center;
-padding: 3px;
-}
-
-hr {
-margin: 6px 10%;
-color: gray;
-}
-
-#controls {
-text-align: center;
-border-top: 1px solid gray;
-position: absolute;
-bottom: 0px;
-left: 0;
-width: 100%;
-background: #eee;
-height: 80px;
-}
 
 button {
 outline: none;
