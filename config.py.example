@@ -1,4 +1,4 @@
 import moviedir
 import mpdaemon
 
-MODULES = [moviedir.MPlayerDir("/var/movies/", tmpdir="/tmp"), mpdaemon.MPDaemon()]
+MODULES = [moviedir.VLCDir("/var/movies/", tmpdir="/tmp"), mpdaemon.MPDaemon()]
