@@ -5,9 +5,9 @@ import os
 class MovieDir(object):
     title = "Movies" # Type of object allowed
 
-    def __init__(self, dir="/var/movies"):
+    def __init__(self, dir="/var/movies", tmpdir="/tmp"):
         self.dir = dir
-        self.mplayer = MPlayer(self.dir)
+        self.mplayer = MPlayer(self.dir, tmpdir=tmpdir)
 
     def is_running(self):
         return self.mplayer.state["movie"] is not None
