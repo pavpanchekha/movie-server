@@ -34,7 +34,7 @@ class MPDaemon(object):
 
         return {"title": artist + " (" + self.__get_position() + ")",
                 "image": None,
-                "description": ("<ol start='%s'><li>"%self.__get_number()) + "</li><li>".join(songs[:17]) + "</li></ol><script>setTimeout('location.reload(true)', 15000);</script>",
+                "description": ("<ol start='%s'><li>"%self.__get_number()) + "</li><li>".join(songs[:10]) + "</li></ol><script>setTimeout('location.reload(true)', 15000);</script>",
                 "rating": None,
                 "meta": {},
                 }

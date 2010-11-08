@@ -12,8 +12,7 @@
 }
 
 div.item {
-    margin: 2px 2px;
-    padding: 10px 0;
+    padding: 10px 2px;
     border-top: 1px solid gray;
 }
 
@@ -32,6 +31,8 @@ div.item form {
 div.item form button {
     min-height: 48px;
     width: 100%;
+    border: 0;
+    background: none;
 }
 
 div.item form .start {
