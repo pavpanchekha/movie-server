@@ -38,19 +38,32 @@ class MPlayer(object):
         self.sync_state()
 
     def send_command(self, cmd):
+<<<<<<< HEAD:moviedir/mplayer.py
         with open(self.FIFO, "w") as f:
             f.write(cmd + "\n")
+=======
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        try:
+            s.connect(self.SOCKET)
+        except socket.error:
+            self.state["movie"] = None
+            self.state["playing"] = False
+            self.sync_state()
+            return
+        s.send(cmd + "\n")
+        s.close()
+>>>>>>> VLC not running detected:moviedir/vlc.py
 
     def pause(self):
         assert self.state["playing"], "Attempting to pause paused movie"
-        self.send_command("pause")
         self.state["playing"] = False
+        self.send_command("pause")
         self.sync_state()
 
     def play(self):
         assert not self.state["playing"], "Attempting to unpause unpaused movie"
-        self.send_command("pause")
         self.state["playing"] = True
+        self.send_command("pause")
         self.sync_state()
     
     def stop(self):
