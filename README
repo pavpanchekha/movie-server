@@ -1,16 +1,14 @@
 Movie-Server 0.5
 ================
 
-Movie-server is a simple tool for armless computers to server movies.
-Despite the name, movie-server is in fact capable of more than simply
-serving movies --- any number of modules can provide
-mutually-exclusive media sources, and movie-server will present them
-to you. To configure these media sources, create a file called
-``config.py``; an example file would be::
+Movie-server is a simple tool to serve movies from armless computers.
+It lets you access your media library and control playback from a
+smartphone.
 
-    from moviedir import MovieDir
+The main goal of movie-server is a slick interface and a seamless user
+experience.  The current approach is to sacrifice scope and features
+if such is required to provide a better experience.  New features have
+to come with convincing user-interface stories.
 
-    MODULES = [MovieDir("/var/movies")]
-
-Any number of modules can be configured in the same way.
-
+Movie-server makes use of the huge growth of free-software media
+solutions.  But movie-server is not affiliated with any.

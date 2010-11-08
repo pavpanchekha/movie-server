@@ -1,0 +1,10 @@
+Support
+=======
+
+Supported browsers are:
+
+* Android 2.2 default browser
+* iOS 3 default browser
+* Chrome 7 and up
+* Firefox 3.6 and up
+

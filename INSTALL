@@ -1,0 +1,19 @@
+Installing Movie-Server
+=======================
+
+Movie-server depends on the Python libraries ``flup`` and ``web.py``.
+Further, it is probably best to install ``lighttpd``, together with
+its fastcgi support, since this is the only currently supported web
+server for movie-server installations (other than the web.py
+development server).
+
+Modules also have their own dependencies; see the module's
+documentation for more.  In short, you probably want to install
+``mplayer``, ``vlc``, or ``mpd`` (or perhaps several).
+
+To install movie-server, copy the ``src/`` directory to anywhere you
+please.  Then make a copy of :file:`lighttpd.conf.example` into
+:file:`lighttpd.conf` and edit the file to reflect the directory you
+chose.  Copy :file:`src/config.py.example` to :file:`src/config.py`
+and modify the settings there; see :doc:`modules` for more on
+configuring modules. Finally, start up lighttpd and test your installation.
