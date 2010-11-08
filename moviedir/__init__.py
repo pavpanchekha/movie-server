@@ -1,24 +1,23 @@
-from mplayer import MPlayer
 from moviedata import Movie
 import os
 
 class MovieDir(object):
     title = "Movies" # Type of object allowed
 
-    def __init__(self, dir="/var/movies", tmpdir="/tmp"):
+    def __init__(self, controller, dir="/var/movies", tmpdir="/tmp"):
         self.dir = dir
-        self.mplayer = MPlayer(self.dir, tmpdir=tmpdir)
+        self.control = controller(self.dir, tmpdir=tmpdir)
 
     def is_running(self):
-        return self.mplayer.state["movie"] is not None
+        return self.control.state["movie"] is not None
 
     def is_playing(self):
-        return self.mplayer.state["playing"]
+        return self.control.state["playing"]
     
     def current(self):
         """Return information about the current movie"""
 
-        curr = Movie(self.dir, self.mplayer.state["movie"])
+        curr = Movie(self.dir, self.control.state["movie"])
 
         return {
             "title": "%s (%d)" % (curr.title, curr.year),
@@ -40,7 +39,15 @@ class MovieDir(object):
                        "image": mov.thumbnail,
                        "meta": {"duration": mov.duration[1]}} for mov in library], key=lambda x: x["title"])
 
-    def pause(self): self.mplayer.pause()
-    def play(self): self.mplayer.play()
-    def stop(self): self.mplayer.stop()
-    def start(self, id): self.mplayer.start(id)
+    def pause(self): self.control.pause()
+    def play(self): self.control.play()
+    def stop(self): self.control.stop()
+    def start(self, id): self.control.start(id)
+
+def VLCDir(dir="/var/movies", tmpdir="/tmp"):
+    from vlc import VLC
+    return MovieDir(VLC, dir, tmpdir)
+
+def MPlayerDir(dir="/var/movies", tmpdir="/tmp"):
+    from mplayer import MPlayer
+    return MovieDir(MPlayer, dir, tmpdir)
