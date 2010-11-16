@@ -1,4 +1,8 @@
 *.pyc
 config.py
 lighttpd.conf
-.ht*
+.*
+!.bash_profile
+*~
+bin/stream.conf
+bin/vlc-custom

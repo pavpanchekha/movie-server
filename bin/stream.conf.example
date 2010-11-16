@@ -1,0 +1,17 @@
+## Basic options
+
+# PID file
+VLC_PID=/var/run/vlc.pid
+# Other hosts in the hegemony
+HOSTS=(dlaw.mit.edu dlaw2.mit.edu pavpanchekha.mit.edu pavpanchekha-desktop.mit.edu)
+# Interface on which to broadcast
+INTERACE=eth0
+
+## More options
+
+# Multicast IP address
+MULTICAST=239.255.17.22
+# Audio bitrate, in kB/s, to stream in when streaming music
+AUDIO_BR=512 #kB/s
+# Port on which VLC should listen for commands
+VLC_PORT=55227

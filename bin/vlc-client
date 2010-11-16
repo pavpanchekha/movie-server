@@ -1,0 +1,38 @@
+#!/bin/bash
+
+. stream.conf
+
+NETSYNC=`ifconfig $INTERFACE | grep "inet addr" | sed 's/.*inet addr:\(\S*\).*/\1/g'`
+
+START_CMD="bin/vlc-custom --control netsync --netsync-master-ip $NETSYNC rtp://$MULTICAST"
+STATUS_CMD="pgrep -of '^/usr/bin/vlc.+rtp://$MULTICAST'"
+STOP_CMD="kill \$($STATUS_CMD)"
+
+start () {
+    ssh "$1" "$START_CMD" 2>/dev/null
+}
+status () {
+    ssh "$1" "$STATUS_CMD" 2>/dev/null
+}
+stop () {
+    ssh "$1" "$STOP_CMD" 2>/dev/null
+}
+restart () {
+    ssh "$1" "$STOP_CMD ; $START_CMD" 2>/dev/null
+}
+
+case "$1" in
+    start) start "$2" ;;
+    status) status "$2" ;;
+    stop) stop "$2" ;;
+    restart) restart "$2" ;;
+    restart-all)
+	for host in ${HOSTS[@]} ; do
+	    if [ -n "$(status $host)" ] ; then
+		restart "$host"
+	    fi
+	done
+ 	;;
+    list) echo ${HOSTS[@]} ;;
+    *) echo "usage: [[start|stop|status] client]|list"
+esac
