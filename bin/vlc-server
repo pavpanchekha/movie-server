@@ -13,15 +13,17 @@ MPD_BR=`cat /etc/mpd.conf | egrep 'type[[:space:]]*"fifo"' -B1 -A4 | grep format
 
 case "$1" in
     mpd)
-	cvlc --demux rawaud --rawaud-samplerate $MPD_BR \
+	vlc -I dummy --demux rawaud --rawaud-samplerate $MPD_BR \
 	    --control netsync --netsync-master --sout \
 	    "#transcode{acodec=mp3,ab=$AUDIO_BR}:rtp{dst=$MULTICAST,mux=ts}" \
 	    - < $MPD_FIFO 2> /dev/null &
+	PROC_PID=$!
 	;;
     file)
-	cvlc -I rc --rc-host "localhost:$VLC_PORT" \
+	vlc -I rc --rc-host "localhost:$VLC_PORT" \
 	    --control netsync --netsync-master --sout \
 	    "#rtp{dst=$MULTICAST,mux=ts}" "$2" 2>/dev/null &
+	PROC_PID=$!
         echo "localhost:$VLC_PORT"
 	;;
     stop)
@@ -32,5 +34,5 @@ esac
 
 if [ "$1" == "mpd" -o "$1" == "file" ] ; then
     sleep 0.5
-    pgrep -n vlc > $VLC_PID
+    echo $PROC_PID > $VLC_PID
 fi
