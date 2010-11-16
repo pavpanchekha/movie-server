@@ -49,10 +49,14 @@ class MPDaemon(object):
 
     def pause(self): get_output(["mpc", "pause"])
     def play(self): get_output(["mpc", "play"])
-    def stop(self): get_output(["mpc", "clear"])
     def skip(self, id): get_output(["mpc", "play", str(id)])
+
+    def stop(self):
+        get_output(["mpc", "clear"])
+        subprocess.Popen(["vlc-server", "stop"]), shell=True)
     
     def start(self, id):
+        subprocess.Popen(["vlc-server", "mpd"]), shell=True)
         get_output(["mpc", "clear"])
         if id == "*":
             import os

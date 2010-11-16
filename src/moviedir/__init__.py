@@ -47,7 +47,3 @@ class MovieDir(object):
 def VLCDir(dir="/var/movies", tmpdir="/tmp"):
     from vlc import VLC
     return MovieDir(VLC, dir, tmpdir)
-
-def MPlayerDir(dir="/var/movies", tmpdir="/tmp"):
-    from mplayer import MPlayer
-    return MovieDir(MPlayer, dir, tmpdir)
