@@ -1,4 +1,2 @@
-import moviedir
-import mpdaemon
-
-MODULES = [moviedir.VLCDir("/var/movies/", tmpdir="/tmp"), mpdaemon.MPDaemon()]
+MOVIEDIR = "/var/movies/"
+TMPDIR = "/tmp"
