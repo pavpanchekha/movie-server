@@ -52,6 +52,9 @@ class index(object):
                 cmod.pause()
             elif action == "stop":
                 cmod.stop()
+            elif cmod == self.song_ctl and action == "skip":
+                pos = int(web.input().position) + 1;
+                cmod.skip(pos);
         else:
             if action == "start":
                 type, id = web.input().file.split(":", 1)
