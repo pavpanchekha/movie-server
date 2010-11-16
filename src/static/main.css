@@ -7,7 +7,37 @@ h1 {
      color: #026;
      text-align: center;
      border-top: 1px solid gray;
+     border-bottom: 1px solid gray;
+     margin-bottom: -1px;
      padding-top: .25em;
      padding-bottom: .25em;
      background: #eee;
+     font-size: 120%;
+     clear: both;
+}
+
+h2 {
+    color: black;
+    text-align: left;
+    font-size: 110%;
+    margin-bottom: 5px;
+}
+
+.duration {
+    font-style: italic;
+    float: right;
+}
+
+#controls {
+    text-align: center;
+    border-top: 1px solid gray;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background: #eee;
+}
+
+#controls button {
+    min-height: 64px; /* iOS workaround */
+    margin: 5px 20px;
 }

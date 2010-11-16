@@ -27,16 +27,14 @@ class MPDaemon(object):
     def current(self):
         N = self.__get_number()-1
         artists = get_output(["mpc", "playlist", "-f", "%artist%"]).strip().split("\n")[N:]
-        songs = get_output(["mpc", "playlist", "-f", "%title%"]).strip().split("\n")[N:]
+        songs = get_output(["mpc", "playlist", "-f", "%title%"]).strip().split("\n")
         freqs = [(a, artists.count(a)) for a in set(artists)]
         freqs.sort(key=lambda x: -x[1])
         artist = freqs[0][0] # Most frequent artist
 
         return {"title": artist + " (" + self.__get_position() + ")",
-                "image": None,
-                "description": ("<ol start='%s'><li>"%self.__get_number()) + "</li><li>".join(songs[:10]) + "</li></ol><script>setTimeout('location.reload(true)', 15000);</script>",
-                "rating": None,
-                "meta": {},
+                "songs": enumerate(songs),
+                "position": self.__get_number(),
                 }
 
     def library(self):
@@ -47,11 +45,12 @@ class MPDaemon(object):
                         "image": None,
                         "description": "",
                         "rating": None,
-                        "meta": {}} for playlist in playlists], key=lambda x: x["title"])
+                        "duration": None} for playlist in playlists], key=lambda x: x["title"])
 
     def pause(self): get_output(["mpc", "pause"])
     def play(self): get_output(["mpc", "play"])
     def stop(self): get_output(["mpc", "clear"])
+    def skip(self, id): get_output(["mpc", "play", str(id)])
     
     def start(self, id):
         get_output(["mpc", "load", id])

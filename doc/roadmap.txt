@@ -1,0 +1,16 @@
+Movie-server Roadmap
+====================
+
+Movie-server is currently at version 0.5. The following represents
+plans for movie-server in coming versions.
+
+Movie-server 0.6
+----------------
+
+* Eliminate current modularity
+  * Modularity will be added back, using a better HTML template
+    library, when the switch to Flask occurs.
+* Richer MPD control --- allow changing songs, showing song durations,
+  and better guessing of current playlist.
+* Hegemony support --- synchronized streaming to multiple servers
+* Command-line interface

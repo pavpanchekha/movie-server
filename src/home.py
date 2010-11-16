@@ -11,41 +11,54 @@ app = web.application(urls, globals())
 render = web.template.render("templates/")
 
 class index(object):
-    def show_current(self, mod):
-        return render.status(mod.current(), mod.is_playing())
+    def __init__(self):
+        from moviedir import MPlayerDir
+        self.movie_ctl = MPlayerDir("/srv/movie-server/movies")
+        from mpdaemon import MPDaemon
+        self.song_ctl = MPDaemon()
+    
+    def show_movie(self):
+        mod = self.movie_ctl
+        return render.movie(mod.current(), mod.is_playing())
+
+    def show_playlist(self):
+        mod = self.song_ctl
+        return render.playlist(mod.current(), mod.is_playing())
 
     def show_library(self):
-        items = [(mod.title, mod.library()) for mod in config.MODULES]
-        return render.library(items)
+        movies = self.movie_ctl.library()
+        playlists = self.song_ctl.library()
+        return render.library(movies, playlists)
     
     def GET(self):
-        for mod in config.MODULES:
-            if mod.is_running():
-                return self.show_current(mod)
+        return self.show_playlist()
+        if self.movie_ctl.is_running():
+            return self.show_movie()
+        elif self.song_ctl.is_running():
+            return self.show_playlist()
         else:
             return self.show_library()
 
     def POST(self):
         action = web.input(action="none").action
-        if action == "none":
-            return self.GET()
 
-        for mod in config.MODULES:
-            if mod.is_running():
-                assert action != "start", "Attempted to start file when file already playing"
-                {"play":  mod.play,
-                 "pause": mod.pause,
-                 "stop":  mod.stop}[action]()
-                break
+        cmod = self.movie_ctl if self.movie_ctl.is_running() else \
+               self.song_ctl  if self.song_ctl.is_running()  else \
+               None
+        if cmod:
+            if action == "play":
+                cmod.play()
+            elif action == "pause":
+                cmod.pause()
+            elif action == "stop":
+                cmod.stop()
         else:
-            assert action in ("none", "start"), "Attempted action on not playing file"
-            type, id = web.input().file.split(":", 1)
-            for mod in config.MODULES:
-                if mod.title == type:
-                    {"start": mod.start}[action](id)
-                    break
-            else:
-                assert False, "No module can handle `%s` type" % type
+            if action == "start":
+                type, id = web.input().file.split(":", 1)
+                if type == "Movies":
+                    self.movie_ctl.start(id)
+                elif type == "Playlists":
+                    self.song_ctl.start(id)
         return web.seeother("/")
 
 if __name__ == "__main__":

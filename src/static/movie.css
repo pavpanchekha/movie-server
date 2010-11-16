@@ -1,0 +1,19 @@
+#cover {
+    float: left;
+    margin: 5px 5px 5px 2px;
+}
+
+h1 {
+    font-size: 120%;
+}
+
+p.summary {
+    text-align: justify;
+    font-size: 135%;
+    padding-right: 2px;
+}
+
+#rating {
+    clear: both;
+    text-align: center;
+}

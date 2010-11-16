@@ -24,7 +24,7 @@ class MovieDir(object):
             "image": curr.thumbnail,
             "description": curr.summary,
             "rating": curr.rating,
-            "meta": {"duration": curr.duration[1]},
+            "duration": curr.duration[1],
             }
 
     def library(self):
@@ -37,7 +37,7 @@ class MovieDir(object):
                        "description": mov.summary,
                        "rating": mov.rating,
                        "image": mov.thumbnail,
-                       "meta": {"duration": mov.duration[1]}} for mov in library], key=lambda x: x["title"])
+                       "duration": mov.duration[1]} for mov in library], key=lambda x: x["title"])
 
     def pause(self): self.control.pause()
     def play(self): self.control.play()

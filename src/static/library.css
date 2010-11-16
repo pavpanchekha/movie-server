@@ -1,24 +1,23 @@
 
-@media all and (min-width: 500px) {
-  html {
-      background: white;
-  }
-
-  body {
-      width: 320px;
-      height:640px;
-      background: #dfd;
-  }
+@media all and (min-width: 475px) { /* Rotated */
+    div.item {
+        width: 235px;
+        float: left;
+        margin: 0 auto;
+    }
 }
 
 div.item {
     padding: 10px 2px;
     border-top: 1px solid gray;
+    height: 1%; /* Don't fight it, it's stronger than you... */
+    overflow: hidden;
 }
 
 div.leftcol {
     float: left;
     width: 110px;
+    text-align: center;
 }
 
 div.item form {
@@ -42,36 +41,13 @@ div.item form .start {
 }
 
 div.rightcol {
-    width: 200px;
-    float: right;
+    margin-left: 115px; 
 }
 
 div.item p.summary {
     text-align: justify;
-    font-size: 14pt;
-}
-
-#rating {
-    width: 100px;
-    text-align: center;
 }
 
 #rating img {
     margin: -2px;
-}
-
-div.item table {
-    width: 200px;
-    float: right;
-    margin-top: 1em;
-}
-
-div.item th {
-    text-align: left;
-}
-
-div.item td {
-    text-align: right;
-    padding-right: 10px;
-    font-style: italic;
 }

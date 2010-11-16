@@ -34,7 +34,7 @@ class MPlayer(object):
         self.state["movie"] = f
         self.state["playing"] = True
         self.make_fifo()
-        subprocess.Popen([MPLAYER, "-fs", "-zoom", "-display", ":0.0", "-idle", "-slave", "-input", "file="+os.path.abspath(self.FIFO), os.path.abspath(os.path.join(self.dir, f))], stderr=open("/dev/null"))
+        subprocess.Popen([MPLAYER, "-fs", "-zoom", "-display", ":0.0", "-idle", "-slave", "-input", "file="+os.path.abspath(self.FIFO), os.path.abspath(os.path.join(self.dir, f))])
         self.sync_state()
 
     def send_command(self, cmd):

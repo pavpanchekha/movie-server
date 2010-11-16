@@ -1,4 +1,4 @@
-$def with (items)
+$def with (movies, playlists)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,39 +9,48 @@ $def with (items)
     <link rel="stylesheet" href="/static/library.css" />
     <script src="http://hyphenator.googlecode.com/svn/trunk/Hyphenator.js"></script>
     <script>Hyphenator.run();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="/static/library.js"></script>
   </head>
   <body>
-$for type, objs in items:
-  <h1>$type</h1>
-  $for item in objs:
+  <h1>Movies</h1>
+  $for movie in movies:
     <div class="item">
-      <div class="rightcol">
-        <h2>$item['title']</h2>
-        <p class="summary hyphenate">$:item['description']</p>
-      $if item['meta']:
-        <table>
-        $for key, value in item['meta'].items():
-          <tr><th>$key.title()</th><td>$value</td></tr>
-        </table>
-      </div>
       <div class="leftcol">
         <form method="post" action="/">
-          <input type="hidden" name="file" value="$type:$item['id']" />
+          <input type="hidden" name="file" value="movie:$movie['id']" />
           <button name="action" value="start">
             <img class="start" src="/static/start.png" height="48px" alt="Play" />
-            $if item["image"] is not None:
-              <img class="cover" src="$item['image']" width="100%" />
+            <img class="cover" src="$movie['image']" width="100%" />
           </button>
         </form>
-      $if item['rating'] is not None:
+      $if movie['rating'] is not None:
         <div id="rating">
-        $for i in range(item['rating']):
+        $for i in range(movie['rating']):
           <img src="/static/heart.png" height="16px" alt="*" />
-        $for i in range(item['rating'], 5):
+        $for i in range(movie['rating'], 5):
           <img src="/static/noheart.png" height="16px" alt="." />
         </div>
       </div>
-      <div style="clear:both"></div>
+      <div class="rightcol">
+        <h2>$movie['title']</h2>
+        <p class="summary hyphenate">$:movie['description'] <span class="duration">$movie['duration']</span></p>
+      </div>
+    </div>
+  <h1>Playlists</h1>
+  $for playlist in playlists:
+    <div class="item">
+      <div class="leftcol">
+        <form method="post" action="/">
+          <input type="hidden" name="file" value="playlist:$playlist['id']" />
+          <button name="action" value="start">
+            <img class="start" src="/static/start.png" height="48px" alt="Play" />
+          </button>
+        </form>
+      </div>
+      <div class="rightcol">
+        <h2>$playlist['title']</h2>
+      </div>
     </div>
   </body>
 </html>

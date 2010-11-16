@@ -6,66 +6,16 @@ $def with (item, is_playing)
     <meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; user-scalable=0;" />
     <title>$item['title']</title>
     <link rel="stylesheet" href="/static/main.css" />
-    <link rel="stylesheet" href="/static/status.css" />
+    <link rel="stylesheet" href="/static/movie.css" />
     <script src="http://hyphenator.googlecode.com/svn/trunk/Hyphenator.js"></script>
     <script>Hyphenator.run();</script>
-    <style>
-button {
-margin: 10px 40px;
-}
-
-img {
-border: none;
-outline: none;
-}
-
-img:active {
-background: #eee;
-}
-
-#cover {
-float: left;
-margin: 0 5px 0 2px;
-}
-
-p.summary {
-text-align: justify;
-font-size: 16pt;
-padding-right: 2px;
-}
-
-ol {
-font-size: 15.5px;
-margin-left: 35px;
-padding: 10px;
-}
-
-#rating {
-text-align: center;
-clear: both;
-margin-top: 3em;
-}
-
-table {
-width: 80%;
-margin: 0 10%;
-}
-
-td {
-text-align: right;
-}
-
-th {
-text-align: left;
-}
-    </style>
   </head>
   <body>
     <h1>$item["title"]</h1>
     $if item['image'] is not None:
       <img id="cover" src="$item['image']" alt="$item['title']" width="125px" />
     <p class="summary hyphenate">
-      $:item["description"]
+      $:item["description"] <span class="duration">$item["duration"]</span>
     </p>
     <div id="rating">
 $if item["rating"] is not None:
@@ -75,11 +25,6 @@ $if item["rating"] is not None:
         <img src="/static/noheart.png" height="24px" alt="." />
 $# End
     </div>
-    <table>
-$for key, value in item['meta'].items():
-        <tr><th>$key.title()</th><td>$value</td></tr>
-$# End
-    </table>
     <form id="controls" method="post" action="/">
       <button name="action" value="stop"><img src="/static/stop.png" height="48px" alt="Stop" /></button>
 $if is_playing:
