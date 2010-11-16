@@ -53,7 +53,12 @@ class MPDaemon(object):
     def skip(self, id): get_output(["mpc", "play", str(id)])
     
     def start(self, id):
-        get_output(["mpc", "load", id])
+        get_output(["mpc", "clear"])
+        if id == "*":
+            import os
+            os.system("mpc listall | mpc add")
+        else:
+            get_output(["mpc", "load", id])
         get_output(["mpc", "shuffle"])
         get_output(["mpc", "play"])
 

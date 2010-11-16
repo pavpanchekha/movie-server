@@ -31,7 +31,6 @@ class index(object):
         return render.library(movies, playlists)
     
     def GET(self):
-        return self.show_playlist()
         if self.movie_ctl.is_running():
             return self.show_movie()
         elif self.song_ctl.is_running():
