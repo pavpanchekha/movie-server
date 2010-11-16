@@ -1,19 +1,48 @@
 Installing Movie-Server
 =======================
 
-Movie-server depends on the Python libraries ``flup`` and ``web.py``.
-Further, it is probably best to install ``lighttpd``, together with
-its fastcgi support, since this is the only currently supported web
-server for movie-server installations (other than the web.py
-development server).
+.. highlight: sh
 
-Modules also have their own dependencies; see the module's
-documentation for more.  In short, you probably want to install
-``mplayer``, ``vlc``, or ``mpd`` (or perhaps several).
+Movie-server depends on the Python library ``web.py``.  Further, it is
+probably best to install ``lighttpd``, together with its fastcgi
+support, since this is the only currently supported web server for
+movie-server installations (other than the web.py development server).
+Most lighttpd installs will require also installing ``flup``, the
+Python library, to allow lighttpd to run Python fastcgi processes.
 
-To install movie-server, copy the ``src/`` directory to anywhere you
-please.  Then make a copy of :file:`lighttpd.conf.example` into
-:file:`lighttpd.conf` and edit the file to reflect the directory you
-chose.  Copy :file:`src/config.py.example` to :file:`src/config.py`
-and modify the settings there; see :doc:`modules` for more on
-configuring modules. Finally, start up lighttpd and test your installation.
+You should also install ``vlc`` and ``mpd``.  On some systems, the
+command-line client for Music Player Daemon is package separately, so
+install ``mpc`` if your distribution provides this package.
+
+The suggested way to set up movie-server is to create a new account on
+your machine (called, say, ``media``) and clone the repository into
+that account's home directory.  To somehow do it otherwise will
+require messing a bit with path.
+
+After the files and dependencies are in place, it is time to edit the
+configuration files.  First, search for all files ending in
+``.example``::
+
+    $ find -name "*.example"
+
+Each of these files should be copied to the same file name less the
+``.example`` and edited to reflect the peculiarities of your system.
+Configuration files are commented.
+
+One must edit the Music Player Daemon configuration to make it output
+audio to a FIFO --- this requires enabling the ``fifo`` type
+``audio_output`` block and setting its ``path`` option to some
+location writable by your ``mpd`` process.
+
+Finally, for all hosts in your hegemony, somehow set up public key
+authentication for SSH.  The simplest solution is to make all
+``media`` accounts in the hegemony share the same key pair (and allow
+that pair).
+
+It is important to note that for movie-server to work correctly, the
+``media`` account must have access to both audio and an X server.  The
+first can be granted by adding ``media`` to the ``audio`` group; the
+second can either be done by running the X server from ``media`` (see:
+`https://wiki.archlinux.org/index.php/Start_X_at_Boot`_) or by running
+``xhost +local:`` from the X server that you want ``media`` to connect
+to.

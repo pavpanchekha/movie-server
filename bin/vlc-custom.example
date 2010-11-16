@@ -1,3 +1,8 @@
 #!/bin/bash
+
+# This file actually runs VLC.  Set whatever options VLC should have,
+# but make _certain_ that the script produces no output and exits
+# without blocking (by, say, putting vlc into the background)
+
 export DISPLAY=:0.0
 vlc -I dummy --width 1280 --height 1024 --fullscreen "$@" >/dev/null 2>&1 &
