@@ -53,10 +53,10 @@ class MPDaemon(object):
 
     def stop(self):
         get_output(["mpc", "clear"])
-        subprocess.Popen(["bash", "-c", "vlc-server stop"], shell=True)
+        subprocess.Popen(["bash", "-c", "vlc-server stop"])
     
     def start(self, id):
-        subprocess.Popen(["bash", "-c", "vlc-server mpd"], shell=True)
+        subprocess.Popen(["bash", "-c", "vlc-server mpd"])
         get_output(["mpc", "clear"])
         if id == "*":
             import os
