@@ -20,7 +20,7 @@ case "$1" in
 	PROC_PID=$!
 	;;
     file)
-        mpc stop;
+        mpc stop -q
 	vlc -I rc --rc-host "localhost:$VLC_PORT" \
 	    --control netsync --netsync-master --sout \
 	    "#rtp{dst=$MULTICAST,mux=ts}" "$2" 2>/dev/null &
@@ -28,7 +28,7 @@ case "$1" in
         echo "localhost:$VLC_PORT"
 	;;
     stop)
-        mpc stop;
+        mpc stop -q
         ;;
     *)
 	echo "usage: mpd|file FNAME|stop"

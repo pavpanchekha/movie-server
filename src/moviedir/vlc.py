@@ -24,9 +24,13 @@ class VLC(object):
             self.stop()
         self.state["movie"] = f
         self.state["playing"] = True
+
         vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], stdout=subprocess.PIPE)
-        vlc.wait()
-        addr, _ = vlc.communicate()
+        
+        addr = ""
+        while not addr.endswith("\n"): addr += vlc.stdout.read(1) # Blocking eww
+        addr = addr[:-1] # Newline
+        
         self.state["socket"] = tuple(addr.rsplit(":", 1))
         self.sync_state()
 
