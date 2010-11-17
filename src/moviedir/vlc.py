@@ -30,8 +30,10 @@ class VLC(object):
         addr = ""
         while not addr.endswith("\n"): addr += vlc.stdout.read(1) # Blocking eww
         addr = addr[:-1] # Newline
-        
-        self.state["socket"] = tuple(addr.rsplit(":", 1))
+
+        host, port = addr.rsplit(":", 1)
+        port = int(port)
+        self.state["socket"] = (host, port)
         self.sync_state()
 
     def send_command(self, cmd):
