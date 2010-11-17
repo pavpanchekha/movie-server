@@ -27,6 +27,7 @@ class VLC(object):
         vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], shell=True, stdout=subprocess.PIPE)
         addr, _ = vlc.communicate()
         self.state["socket"] = tuple(addr.rsplit(":", 1))
+        print self.state["socket"]
         self.sync_state()
 
     def send_command(self, cmd):
