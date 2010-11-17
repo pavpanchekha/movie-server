@@ -59,4 +59,4 @@ class VLC(object):
         self.state["playing"] = False
         self.state["socket"] = None
         self.sync_state()
-        subprocess.Popen(["vlc-server" "stop"], shell=True)
+        subprocess.Popen(["vlc-server", "stop"], shell=True)
