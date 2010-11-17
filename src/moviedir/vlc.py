@@ -45,7 +45,8 @@ class VLC(object):
             self.state["playing"] = False
             self.sync_state()
         else:
-            s.send(cmd + "\r")
+            s.send(cmd + "\n")
+            s.send("quit\n")
         
         s.close()
 
