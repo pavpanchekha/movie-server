@@ -12,7 +12,7 @@ render = web.template.render("templates/")
 
 class index(object):
     def __init__(self):
-        from moviedir import MPlayerDir
+        from moviedir import VLCDir
         self.movie_ctl = VLCDir(config.MOVIEDIR, config.TMPDIR)
         from mpdaemon import MPDaemon
         self.song_ctl = MPDaemon()
