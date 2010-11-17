@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+import config
+
 from moviedir import VLCDir
-movie_ctl = VLCDir("/srv/movie-server/movies")
+movie_ctl = VLCDir(config.MOVIEDIR, config.TMPDIR)
 from mpdaemon import MPDaemon
 song_ctl = MPDaemon()
 
