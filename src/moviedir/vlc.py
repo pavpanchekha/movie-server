@@ -7,7 +7,7 @@ VLCBINARY = "/usr/bin/vlc"
 
 class VLC(object):
     def __init__(self, dir, tmpdir):
-        self.STATE = os.path.join(tmpdir, "mplayer.pickle")
+        self.STATE = os.path.join(tmpdir, "vlc.pickle")
         
         self.dir = dir
         if os.path.exists(self.STATE):
@@ -24,7 +24,7 @@ class VLC(object):
             self.stop()
         self.state["movie"] = f
         self.state["playing"] = True
-        vlc = subprocess.Popen(["vlc-server", "file", os.path.abspath(os.path.join(self.dir, f))], shell=True, stdout=subprocess.PIPE)
+        vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], shell=True, stdout=subprocess.PIPE)
         addr, _ = vlc.communicate()
         self.state["socket"] = tuple(addr.rsplit(":", 1))
         self.sync_state()
@@ -59,4 +59,4 @@ class VLC(object):
         self.state["playing"] = False
         self.state["socket"] = None
         self.sync_state()
-        subprocess.Popen(["vlc-server", "stop"], shell=True)
+        subprocess.Popen(["bash", "-c", "vlc-server stop"], shell=True)
