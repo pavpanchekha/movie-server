@@ -24,10 +24,8 @@ class VLC(object):
             self.stop()
         self.state["movie"] = f
         self.state["playing"] = True
-        open("/tmp/is-it-started", "w").write("Not yet")
         vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], stdout=subprocess.PIPE)
         vlc.wait()
-        open("/tmp/is-it-started", "w").write("Python thinks so")
         addr, _ = vlc.communicate()
         self.state["socket"] = tuple(addr.rsplit(":", 1))
         self.sync_state()
