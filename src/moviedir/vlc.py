@@ -23,17 +23,17 @@ class VLC(object):
         if self.state["movie"] is not None:
             self.stop()
         self.state["movie"] = f
+        print ["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))]
         self.state["playing"] = True
         vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], shell=True, stdout=subprocess.PIPE)
         addr, _ = vlc.communicate()
         self.state["socket"] = tuple(addr.rsplit(":", 1))
-        print self.state["socket"]
         self.sync_state()
 
     def send_command(self, cmd):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            s.connect(*self.state["socket"])
+            s.connect(self.state["socket"])
         except IOError:
             self.state["movie"] = None
             self.state["playing"] = False
