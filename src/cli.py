@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from moviedir import MPlayerDir
-movie_ctl = MPlayerDir("/srv/movie-server/movies")
+from moviedir import VLCDir
+movie_ctl = VLCDir("/srv/movie-server/movies")
 from mpdaemon import MPDaemon
 song_ctl = MPDaemon()
 
