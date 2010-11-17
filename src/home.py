@@ -57,10 +57,12 @@ class index(object):
         else:
             if action == "start":
                 type, id = web.input().file.split(":", 1)
-                if type == "Movies":
+                if type == "movie":
                     self.movie_ctl.start(id)
-                elif type == "Playlists":
+                elif type == "playlist":
                     self.song_ctl.start(id)
+                else:
+                    raise ValueError("Unknown type `%s`" % type)
         return web.seeother("/")
 
 if __name__ == "__main__":
