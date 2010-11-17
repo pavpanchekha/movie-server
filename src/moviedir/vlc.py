@@ -23,9 +23,9 @@ class VLC(object):
         if self.state["movie"] is not None:
             self.stop()
         self.state["movie"] = f
-        print ["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))]
         self.state["playing"] = True
-        vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], shell=True, stdout=subprocess.PIPE)
+        vlc = subprocess.Popen(["bash", "-c", "vlc-server file % s" % os.path.abspath(os.path.join(self.dir, f))], stdout=subprocess.PIPE)
+        vlc.wait()
         addr, _ = vlc.communicate()
         self.state["socket"] = tuple(addr.rsplit(":", 1))
         self.sync_state()
