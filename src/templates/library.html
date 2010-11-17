@@ -13,30 +13,6 @@ $def with (movies, playlists)
     <script src="/static/library.js"></script>
   </head>
   <body>
-  <h1>Movies</h1>
-  $for movie in movies:
-    <div class="item">
-      <div class="leftcol">
-        <form method="post" action="/">
-          <input type="hidden" name="file" value="movie:$movie['id']" />
-          <button name="action" value="start">
-            <img class="start" src="/static/start.png" height="48px" alt="Play" />
-            <img class="cover" src="$movie['image']" width="100%" />
-          </button>
-        </form>
-      $if movie['rating'] is not None:
-        <div id="rating">
-        $for i in range(movie['rating']):
-          <img src="/static/heart.png" height="16px" alt="*" />
-        $for i in range(movie['rating'], 5):
-          <img src="/static/noheart.png" height="16px" alt="." />
-        </div>
-      </div>
-      <div class="rightcol">
-        <h2>$movie['title']</h2>
-        <p class="summary hyphenate">$:movie['description'] <span class="duration">$movie['duration']</span></p>
-      </div>
-    </div>
   <h1>Playlists</h1>
   $for playlist in playlists:
     <div class="item">
@@ -65,5 +41,29 @@ $def with (movies, playlists)
       <h2>All Music</h2>
     </div>
   </div>
+  <h1>Movies</h1>
+  $for movie in movies:
+    <div class="item">
+      <div class="leftcol">
+        <form method="post" action="/">
+          <input type="hidden" name="file" value="movie:$movie['id']" />
+          <button name="action" value="start">
+            <img class="start" src="/static/start.png" height="48px" alt="Play" />
+            <img class="cover" src="$movie['image']" width="100%" />
+          </button>
+        </form>
+      $if movie['rating'] is not None:
+        <div id="rating">
+        $for i in range(movie['rating']):
+          <img src="/static/heart.png" height="16px" alt="*" />
+        $for i in range(movie['rating'], 5):
+          <img src="/static/noheart.png" height="16px" alt="." />
+        </div>
+      </div>
+      <div class="rightcol">
+        <h2>$movie['title']</h2>
+        <p class="summary hyphenate">$:movie['description'] <span class="duration">$movie['duration']</span></p>
+      </div>
+    </div>
   </body>
 </html>
