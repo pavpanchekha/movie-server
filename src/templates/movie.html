@@ -29,10 +29,10 @@ $# End
     <div id="controls">
       <form method="post" action="/">
         <button name="action" value="stop"><img src="/static/stop.png" height="48px" alt="Stop" /></button>
-$if is_playing:
-        <button name="action" value="pause"><img src="/static/pause.png" height="48px" alt="Pause" /></a>
-$else:
-        <button name="action" value="play"><img src="/static/start.png" height="48px" alt="Play" /></button>
+	$if is_playing:
+          <button name="action" value="pause"><img src="/static/pause.png" height="48px" alt="Pause" /></button>
+	$else:
+          <button name="action" value="play"><img src="/static/start.png" height="48px" alt="Play" /></button>
       </form>
       <form id="hegemony" method="post" action="/">
         $for host, description in hosts.items():

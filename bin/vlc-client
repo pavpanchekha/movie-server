@@ -5,11 +5,14 @@
 NETSYNC=`ifconfig $INTERFACE | grep "inet addr" | sed 's/.*inet addr:\(\S*\).*/\1/g'`
 
 STATUS_CMD="pgrep -of '^(/usr/bin/)?vlc.+rtp://$MULTICAST'"
-START_CMD="if [ -z "\$($STATUS_CMD)" ]; then bin/vlc-custom --control netsync --netsync-master-ip $NETSYNC rtp://$MULTICAST fi"
+START_CMD="bin/vlc-custom --control netsync --netsync-master-ip $NETSYNC rtp://$MULTICAST fi"
 STOP_CMD="kill \$($STATUS_CMD)"
 
 start () {
-    ssh "$1" "$START_CMD" 2>/dev/null
+    STATUS=`status $1`
+    if [ "x$STATUS" == "x" ]; then
+        ssh "$1" "$START_CMD" 2>/dev/null
+    fi
 }
 status () {
     ssh "$1" "$STATUS_CMD" 2>/dev/null

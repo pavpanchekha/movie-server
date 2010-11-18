@@ -50,7 +50,8 @@ class index(object):
                     self.heg_ctl.start(server)
                 else:
                     self.heg_ctl.stop(server)
-            return
+            return web.seeother("/")
+
         cmod = self.movie_ctl if self.movie_ctl.is_running() else \
                self.song_ctl  if self.song_ctl.is_running()  else \
                None
