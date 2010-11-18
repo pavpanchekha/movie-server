@@ -1,2 +1,7 @@
 MOVIEDIR = "/var/movies/"
 TMPDIR = "/tmp"
+
+HOSTS = {
+    "host1": "Description",
+    "user2@host2": "Other Description",
+}
