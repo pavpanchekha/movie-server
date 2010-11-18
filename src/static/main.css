@@ -42,17 +42,6 @@ h2 {
     margin: 5px 20px;
 }
 
-#popup {
-    float: right;
-    font-size: 32px;
-    color: #888;
-    text-decoration: none;
-}
-
-#popup:active {
-    color: #000;
-}
-
 #hegemony {
     display: none;
 }
