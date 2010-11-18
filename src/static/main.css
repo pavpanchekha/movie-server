@@ -50,7 +50,7 @@ h2 {
     display: block;
 }
 
-#hegemony ul {
+#hegemony {
     list-style-type: none;
     text-align: left;
     border-top: 1px solid gray;
