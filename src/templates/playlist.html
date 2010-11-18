@@ -34,7 +34,7 @@ $def with (item, is_playing, hosts, heg)
           $else:
             <li><input type="checkbox" name="server" value="$host" id="server:$host" /><label for="server:$host">$description</label></li>
         </ul>
-        <button id="popup" type="button"><img src="/static/outputs.png" height="48px" alt="Outputs" /></button>
+        <button id="popup" name="action" value="hegemony"><img src="/static/outputs.png" height="48px" alt="Outputs" /></button>
         <button name="action" value="stop"><img src="/static/stop.png" height="48px" alt="Stop" /></button>
         $if is_playing:
           <button name="action" value="pause"><img src="/static/pause.png" height="48px" alt="Pause" /></button>
