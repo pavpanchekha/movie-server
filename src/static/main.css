@@ -41,3 +41,50 @@ h2 {
     min-height: 64px; /* iOS workaround */
     margin: 5px 20px;
 }
+
+#popup {
+    float: right;
+    font-size: 32px;
+    color: #888;
+    text-decoration: none;
+}
+
+#popup:active {
+    color: #000;
+}
+
+#hegemony {
+    display: none;
+}
+
+#hegemony.display {
+    display: block;
+}
+
+#hegemony ul {
+    list-style-type: none;
+    text-align: left;
+    border-top: 1px solid gray;
+    padding-top: 15px;
+}
+
+#hegemony input {
+    display: none;
+}
+
+#hegemony input + label {
+    margin: 0 10px;
+    padding-left: 50px;
+    font-size: 30px;
+    background: url('/static/stop.png') no-repeat left center;
+}
+
+#hegemony input:checked + label {
+    background: url('/static/start.png') no-repeat left center;
+}
+
+#hegemony button {
+    display: block;
+    margin: 10px auto;
+    min-height: 0;
+}
