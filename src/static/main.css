@@ -39,7 +39,7 @@ h2 {
 
 #controls button {
     min-height: 64px; /* iOS workaround */
-    margin: 5px 20px;
+    margin: 5px 10px;
 }
 
 #hegemony {

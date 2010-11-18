@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $("#popup").click(function () {$("#hegemony").toggleClass("display");});
+    $("#popup").one(function () {$("#hegemony").toggleClass("display"); return false;});
 });
