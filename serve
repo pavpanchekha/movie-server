@@ -1,1 +1,13 @@
-lighttpd -f lighttpd.conf 2>&1 > tmp/log
+#!/bin/bash
+
+if [[ $1 == "kill" ]]; then
+    killall lighttpd
+    for host in ${HOSTS[@]}; do
+        ssh $host -O exit
+    done
+else
+    for host in ${HOSTS[@]}; do
+        ssh $host -MN &disown
+    done
+    lighttpd -f lighttpd.conf
+fi
