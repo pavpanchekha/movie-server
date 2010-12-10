@@ -6,6 +6,7 @@ if [ -e $VLC_PID ] ; then
     kill $(cat $VLC_PID)
     rm $VLC_PID
     vlc-client restart-all &
+    mpc stop -q
 fi
 
 MPD_FIFO=`cat /etc/mpd.conf | egrep 'type[[:space:]]*"fifo"' -B1 -A4 | grep path | sed -r 's/\s+path\s+"(.+)"/\1/g'`
@@ -18,9 +19,9 @@ case "$1" in
 	    "#transcode{acodec=mp3,ab=$AUDIO_BR}:rtp{dst=$MULTICAST,mux=ts}" \
 	    - < $MPD_FIFO 2> /dev/null &
 	PROC_PID=$!
+	mpc play
 	;;
     file)
-        mpc stop -q
 	vlc -I rc --rc-host "localhost:$VLC_PORT" \
 	    --control netsync --netsync-master --sout \
 	    "#rtp{dst=$MULTICAST,mux=ts}" "$2" 2>/dev/null &
@@ -28,7 +29,6 @@ case "$1" in
         echo "localhost:$VLC_PORT"
 	;;
     stop)
-        mpc stop -q
         ;;
     *)
 	echo "usage: mpd|file FNAME|stop"

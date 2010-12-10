@@ -20,7 +20,7 @@ class MovieDir(object):
         curr = Movie(self.dir, self.control.state["movie"])
 
         return {
-            "title": "%s (%d)" % (curr.title, curr.year),
+            "title": "%s (%s)" % (curr.title, curr.year),
             "image": curr.thumbnail,
             "description": curr.summary,
             "rating": curr.rating,

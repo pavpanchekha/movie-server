@@ -12,7 +12,7 @@ class Movie(object):
                 lines = f.readlines()
                 title, chunk = lines[0].rsplit("(", 1)
                 self.title = title.strip()
-                self.year = int(chunk.split(")")[0])
+                self.year = chunk.split(")")[0]
                 self.rating = int(lines[1].count("*") / float(lines[1].count(".") + lines[1].count("*")) * 5)
                 self.summary = "".join(lines[3:]).replace("\n", " ")
         except IOError:
@@ -34,10 +34,10 @@ class Movie(object):
         import subprocess
         try:
             proc = subprocess.Popen(["ffprobe", os.path.join(self.dir, self.f)], stderr=subprocess.PIPE)
+       	    proc.wait()
+            _, data = proc.communicate()
+            duration_line = [line for line in data.split("\n") if "Duration" in line][0]
+            hrs,min,sec = map(float, duration_line.strip().split()[1][:-1].split(":"))
+            return sec/60 + min + hrs*60, "%02d:%02d" % (hrs, min)
         except:
             return 0, "??:??"
-        proc.wait()
-        _, data = proc.communicate()
-        duration_line = [line for line in data.split("\n") if "Duration" in line][0]
-        hrs,min,sec = map(float, duration_line.strip().split()[1][:-1].split(":"))
-        return sec/60 + min + hrs*60, "%02d:%02d" % (hrs, min)
