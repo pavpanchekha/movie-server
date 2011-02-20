@@ -5,7 +5,7 @@
 NETSYNC=`ifconfig $INTERFACE | grep "inet addr" | sed 's/.*inet addr:\(\S*\).*/\1/g'`
 
 STATUS_CMD="pgrep -of '^(/usr/bin/)?vlc.+rtp://$MULTICAST'"
-START_CMD="bin/vlc-custom --control netsync --netsync-master-ip $NETSYNC rtp://$MULTICAST fi"
+START_CMD="bin/vlc-custom --control netsync --netsync-master-ip $NETSYNC rtp://$MULTICAST"
 STOP_CMD="kill \$($STATUS_CMD)"
 
 start () {
