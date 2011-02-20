@@ -21,6 +21,13 @@ case "$1" in
 	PROC_PID=$!
 	mpc play
 	;;
+    transcode)
+	vlc -I rc --rc-host "localhost:$VLC_PORT" \
+	    --control netsync --netsync-master --sout \
+	    "#transcode{vcodec=mp4a,acodec=mpga,vb=1024,ab=128,deinterlace}:rtp{dst=$MULTICAST,mux=ts}" "$2" 2>/dev/null &
+	PROC_PID=$!
+	echo "localhost:$VLC_PORT"
+	;;
     file)
 	vlc -I rc --rc-host "localhost:$VLC_PORT" \
 	    --control netsync --netsync-master --sout \
@@ -34,7 +41,7 @@ case "$1" in
 	echo "usage: mpd|file FNAME|stop"
 esac
 
-if [ "$1" == "mpd" -o "$1" == "file" ] ; then
+if [ "$1" == "mpd" -o "$1" == "file" -o "$1" == "transcode" ] ; then
     sleep 0.5
     echo $PROC_PID > $VLC_PID
 fi
