@@ -6,6 +6,13 @@ if [[ $1 == "kill" ]]; then
         ssh $host -O exit
     done
 else
+    if mpc -q >/dev/null 2>&1 then; else
+        echo "E MPD not running"
+        echo "  Start MPD before starting Movie-Server"
+        exit 1
+    fi
+
+
     for host in ${HOSTS[@]}; do
         ssh $host -MN &disown
     done

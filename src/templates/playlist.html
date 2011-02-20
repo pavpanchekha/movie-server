@@ -9,7 +9,9 @@ $def with (item, is_playing, hosts, heg)
     <link rel="stylesheet" href="/static/playlist.css" />
     <link rel="apple-touch-icon-precomposed" href="/static/icon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script src="/static/main.js"></script>
     <script src="/static/controls.js"></script>
+    <script src="/static/playlist.js"></script>
   </head>
   <body>
     <h1>$item["title"]</h1>
@@ -18,9 +20,9 @@ $def with (item, is_playing, hosts, heg)
       <ol start="$item['position']">
       $for id, song in item["songs"]:
         $if id + 1 == item["position"]:
-          <li class="active"><button class="song" name="position" value="$id">$song</button></li>
+          <li id="song$id" class="active"><button class="song" name="position" value="$id">$song</button></li>
         $else:
-          <li><button class="song" name="position" value="$id">$song</button></li>
+          <li id="song$id"><button class="song" name="position" value="$id">$song</button></li>
       </ol>
     </form>
     <div id="controls">
