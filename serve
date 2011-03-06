@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. bin/stream.conf
+
 if [[ $1 == "kill" ]]; then
     killall -u media lighttpd
     for host in ${HOSTS[@]}; do
