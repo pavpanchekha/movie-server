@@ -1,7 +1,6 @@
 *.pyc
 config.py
 lighttpd.conf
-.*
 !.bash_profile
 *~
 bin/stream.conf

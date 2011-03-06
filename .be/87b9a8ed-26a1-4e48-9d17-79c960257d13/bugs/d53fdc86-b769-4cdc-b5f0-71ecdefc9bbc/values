@@ -1,0 +1,17 @@
+creator: Pavel Panchekha <pavpanchekha@gmail.com>
+
+
+reporter: Pavel Panchekha <pavpanchekha@gmail.com>
+
+
+severity: minor
+
+
+status: open
+
+
+summary: Don't dump entire playlist (slow loading)
+
+
+time: Sun, 06 Mar 2011 23:22:35 +0000
+
