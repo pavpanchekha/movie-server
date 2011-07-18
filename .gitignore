@@ -5,3 +5,9 @@ lighttpd.conf
 *~
 bin/stream.conf
 bin/vlc-custom
+bin/activate*
+bin/easy_install*
+bin/pip*
+bin/python*
+include
+lib
