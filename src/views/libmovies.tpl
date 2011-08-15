@@ -1,0 +1,34 @@
+%def head():
+    <link rel="stylesheet" href="/static/library.css" />
+    <script src="/static/library.js"></script>
+%end
+
+%rebase master title="Library", head=head
+
+<h1>Movies</h1>
+%for movie in movies:
+  <div class="item">
+    <div class="leftcol">
+      <form method="post" action="/movie/{{movie['id']}}">
+        <button name="action" value="start">
+          <img class="start" src="/static/start.png" height="48px" alt="Play" />
+          <img class="cover" src="{{movie['image']}}" width="100%" />
+        </button>
+      </form>
+    %if movie['rating'] is not None:
+      <div id="rating">
+      %for i in range(movie['rating']):
+        <img src="/static/heart.png" height="16px" alt="*" />
+      %end for
+      %for i in range(movie['rating'], 5):
+        <img src="/static/noheart.png" height="16px" alt="." />
+      %end for
+      </div>
+    %end for
+    </div>
+    <div class="rightcol">
+      <h2>{{movie['title']}}</h2>
+      <p class="summary hyphenate">{{movie['description']}} <span class="duration">{{movie['duration']}}</span></p>
+    </div>
+  </div>
+%end for

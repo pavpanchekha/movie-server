@@ -16,7 +16,7 @@ class MPDaemon(object):
         return get_output(["mpc"]).split("\n")[1].split()[0][1:-1] == "playing"
 
     def __get_playlists(self):
-        return filter(lambda x: x[0].islower(), get_output(["mpc", "lsplaylists"]).strip().split("\n"))
+        return filter(lambda x: x and x[0].islower(), get_output(["mpc", "lsplaylists"]).strip().split("\n"))
 
     def __get_position(self):
         return get_output(["mpc"]).split("\n")[1].split()[1][1:]
@@ -24,15 +24,14 @@ class MPDaemon(object):
     def __get_number(self):
         return int(self.__get_position().split("/")[0])
 
-    def current(self):
-        N = self.__get_number()-1
-        artists = get_output(["mpc", "playlist", "-f", "%artist%"]).strip().split("\n")[N:]
-        songs = get_output(["mpc", "playlist", "-f", "%title%"]).strip().split("\n")
-        freqs = [(a, artists.count(a)) for a in set(artists)]
-        freqs.sort(key=lambda x: -x[1])
-        artist = freqs[0][0] # Most frequent artist
+    def current(self, id):
+        if id != "*":
+            songs = get_output(["mpc", "lsplaylist", id, "-f", "%title%"]).strip().split("\n")
+        else:
+            songs = get_output(["mpc", "listall", "-f", "%title%"]).strip().split("\n")
+            
 
-        return {"title": artist + " (" + self.__get_position() + ")",
+        return {"title": id.title().replace("-", " ") + " (" + self.__get_position() + ")",
                 "songs": enumerate(songs),
                 "position": self.__get_number(),
                 }

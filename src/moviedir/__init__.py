@@ -14,10 +14,10 @@ class MovieDir(object):
     def is_playing(self):
         return self.control.state["playing"]
     
-    def current(self):
+    def current(self, id=None):
         """Return information about the current movie"""
 
-        curr = Movie(self.dir, self.control.state["movie"])
+        curr = Movie(self.dir, id)
 
         return {
             "title": "%s (%s)" % (curr.title, curr.year),
