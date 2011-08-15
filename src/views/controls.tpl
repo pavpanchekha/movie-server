@@ -1,5 +1,5 @@
 <div id="controls">
-  <form method="post" action="/">
+  <form method="post" action="/{{mod}}/{{name}}">
     <ul id="hegemony">
     %for host, description in hosts.items():
       %if heg[host]:

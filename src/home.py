@@ -17,6 +17,7 @@ heg_ctl = Hegemony(config.HOSTS)
 def show_movie(id):
     mod = movie_ctl
     return dict(item=mod.current(id),
+                name=id,
                 is_playing=mod.is_playing(),
                 hosts=config.HOSTS,
                 heg=heg_ctl.status_all())
@@ -41,9 +42,28 @@ def post_movie(id):
 def show_playlist(id):
     mod = song_ctl
     return dict(item=mod.current(id),
+                name=id,
                 is_playing=mod.is_playing(),
                 hosts=config.HOSTS,
                 heg=heg_ctl.status_all())
+
+@bottle.post("/playlist/:id")
+def post_playlist(id):
+    action = bottle.request.forms.get("action", "none")
+
+    if action == "start":
+        song_ctl.start(id)
+    elif action == "play":
+        song_ctl.play()
+    elif action == "pause":
+        song_ctl.pause()
+    elif action == "stop":
+        song_ctl.stop()
+    elif action == "skip":
+        pos = int(bottle.request.forms.get("position", 0)) + 1;
+        song_ctl.skip(pos);
+
+    return show_playlist(id)
 
 @bottle.get("/library")
 @bottle.view("library")

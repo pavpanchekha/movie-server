@@ -15,16 +15,9 @@
           <img class="cover" src="{{movie['image']}}" width="100%" />
         </button>
       </form>
-    %if movie['rating'] is not None:
-      <div id="rating">
-      %for i in range(movie['rating']):
-        <img src="/static/heart.png" height="16px" alt="*" />
-      %end for
-      %for i in range(movie['rating'], 5):
-        <img src="/static/noheart.png" height="16px" alt="." />
-      %end for
+      <div class="rating">
+      %include stars rating=movie["rating"]
       </div>
-    %end for
     </div>
     <div class="rightcol">
       <h2>{{movie['title']}}</h2>

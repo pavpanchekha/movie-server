@@ -48,6 +48,8 @@ div.item p.summary {
     text-align: justify;
 }
 
-#rating img {
+.rating img {
     margin: -2px;
+    width: 16px;
+    height: 16px;
 }

@@ -14,14 +14,7 @@
 </p>
 
 <div id="rating">
-%if item["rating"] is not None:
-  %for i in range(item["rating"]):
-    <img src="/static/heart.png" height="24px" alt="*" />
-  %end for
-  %for i in range(item["rating"], 5):
-    <img src="/static/noheart.png" height="24px" alt="." />
-  %end for
-%end if
+%include stars rating=item["rating"]
 </div>
 
-%include controls hosts=hosts, heg=heg, is_playing=is_playing
+%include controls hosts=hosts, heg=heg, is_playing=is_playing, mod="playlist", name=name

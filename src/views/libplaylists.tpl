@@ -9,8 +9,7 @@
 %for playlist in playlists:
   <div class="item">
     <div class="leftcol">
-      <form method="post" action="/">
-        <input type="hidden" name="file" value="playlist:{{playlist['id']}}" />
+      <form method="post" action="/playlist/{{playlist['id']}}">
         <button name="action" value="start">
           <img class="start" src="/static/start.png" height="48px" alt="Play" />
         </button>
@@ -23,8 +22,7 @@
 %end for
 <div class="item">
   <div class="leftcol">
-    <form method="post" action="/">
-      <input type="hidden" name="file" value="playlist:*" />
+    <form method="post" action="/playlist/*">
       <button name="action" value="start">
         <img class="start" src="/static/start.png" height="48px" alt="Play" />
       </button>

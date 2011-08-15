@@ -7,7 +7,7 @@
 %rebase master title=item["title"], head=head
 
 <h1>{{item["title"]}}</h1>
-<form method="post" action="/">
+<form method="post" action="/playlist/{{name}}">
   <input type="hidden" name="action" value="skip" />
   <ol start="{{item['position']}}">
   %for id, song in item["songs"]:
@@ -20,4 +20,4 @@
   </ol>
 </form>
 
-%include controls hosts=hosts, heg=heg, is_playing=is_playing
+%include controls hosts=hosts, heg=heg, is_playing=is_playing, mod="playlist", name=name
