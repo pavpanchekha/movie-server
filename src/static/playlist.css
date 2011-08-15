@@ -1,5 +1,4 @@
 ol {
-    font-size: 120%;
     position: absolute;
     overflow: auto;
     left: 0;
@@ -10,14 +9,13 @@ ol {
 }
 
 li {
-    border-bottom: 1px solid #ddd;
-    font-size: 110%;
+    border-bottom: 1px solid #444;
     vertical-align: middle;
     line-height: 2.2em;
 }
 
 li button.song {
-    font-size: 100%;
+    font-size: 14pt;
     width: 100%;
     min-height: 48px;
     background: white url('/static/skip.png') no-repeat right top;

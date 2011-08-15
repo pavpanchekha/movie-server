@@ -19,6 +19,7 @@ function fix_widths() {
     });
 }
 
-
+/*
 $(window).load(fix_widths);
 $(window).resize(fix_widths);
+*/

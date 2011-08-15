@@ -9,6 +9,7 @@
     <link rel="apple-touch-icon-precomposed" href="/static/icon.png" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script src="/static/main.js"></script>
+    <script src="/static/hyphenate.js"></script>
     %head()
   </head>
   <body>

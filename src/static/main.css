@@ -3,23 +3,25 @@
     padding: 0;
 }
 
+body {
+    color: white;
+    font-size: 14pt;
+    font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
+    background: black;
+}
+
 h1 {
-     color: #026;
-     text-align: center;
-     border-top: 1px solid gray;
-     border-bottom: 1px solid gray;
-     margin-bottom: -1px;
-     padding-top: .25em;
-     padding-bottom: .25em;
-     background: #eee;
-     font-size: 120%;
+     text-align: left;
+     margin-bottom: 5px;
+     font-size: 18pt;
+     height: 18pt;
+     overflow: none;
      clear: both;
 }
 
 h2 {
-    color: black;
     text-align: left;
-    font-size: 110%;
+    font-size: 15pt;
     margin-bottom: 5px;
 }
 
@@ -30,11 +32,10 @@ h2 {
 
 #controls {
     text-align: center;
-    border-top: 1px solid gray;
     position: absolute;
     bottom: 0px;
     width: 100%;
-    background: #eee;
+    background: white;
 }
 
 #controls button {
@@ -64,7 +65,7 @@ h2 {
 #hegemony input + label {
     margin: 0 10px;
     padding-left: 50px;
-    font-size: 30px;
+    font-size: 15pt;
     background: url('/static/stop.png') no-repeat left center;
 }
 

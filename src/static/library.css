@@ -1,17 +1,29 @@
 
 @media all and (min-width: 475px) { /* Rotated */
     div.item {
-        width: 235px;
+        width: 48%;
         float: left;
-        margin: 0 auto;
+        margin: .5% .5em;
+    }
+}
+
+@media all and (min-width: 600px) { /* Screen */
+    div.item {
+        width: 31.5% !important;
+        margin: .5%;
+        overflow: hidden;
+        max-height: 200px;
     }
 }
 
 div.item {
     padding: 10px 2px;
-    border-top: 1px solid gray;
-    height: 1%; /* Don't fight it, it's stronger than you... */
-    overflow: hidden;
+    min-height: 200px; /* Don't fight it, it's stronger than you... */
+    margin: 0 .5em;
+}
+
+div.item.XXX {
+    min-height: 0;
 }
 
 div.leftcol {
