@@ -11,6 +11,17 @@ from mpdaemon import MPDaemon
 song_ctl = MPDaemon()
 from hegemony import Hegemony
 heg_ctl = Hegemony(config.HOSTS)
+
+@bottle.post("/hegemony")
+def do_hegemony():
+    servers = bottle.request.forms.get("server", [])
+    for server in config.HOSTS:
+        if server in servers:
+            heg_ctl.start(server)
+        else:
+            heg_ctl.stop(server)
+    return bottle.redirect("/current")
+
     
 @bottle.get("/movie/:id")
 @bottle.view("movie")
@@ -88,7 +99,7 @@ def show_movies():
 def static(filename):
     return bottle.static_file(filename, root='static/')
 
-@bottle.get("/current")
+@bottle.get("/")
 def current():
     if movie_ctl.is_running():
         return bottle.redirect("/movie")
@@ -96,50 +107,6 @@ def current():
         return bottle.redirect("/playlist")
     else:
         return bottle.redirect("/library")
-
-@bottle.get("/")
-def index():
-    return bottle.redirect("/current")
-
-@bottle.post("/")
-def POST():
-    req = bottle.request
-    action = req.forms.get("action", "none")
-
-    if action == "hegemony":
-        servers = req.forms.get("server", [])
-        for server in config.HOSTS:
-            if server in servers:
-                heg_ctl.start(server)
-            else:
-                heg_ctl.stop(server)
-        return bottle.redirect("/current")
-
-    cmod = movie_ctl if movie_ctl.is_running() else \
-           song_ctl  if song_ctl.is_running()  else \
-           None
-    if cmod:
-        if action == "play":
-            cmod.play()
-        elif action == "pause":
-            cmod.pause()
-        elif action == "stop":
-            cmod.stop()
-        elif cmod == song_ctl and action == "skip":
-            pos = int(req.forms.get("position", 0)) + 1;
-            cmod.skip(pos);
-    else:
-        if action == "start":
-            type, id = req.forms.get("file", "").split(":", 1)
-            if type == "movie":
-                movie_ctl.start(id)
-                return bottle.redirect("/movie/%s" % id)
-            elif type == "playlist":
-                song_ctl.start(id)
-                return bottle.redirect("/playlist/%s" % id)
-            else:
-                raise ValueError("Unknown type `%s`" % type)
-    return bottle.redirect("/current")
 
 if __name__ == "__main__":
     bottle.debug()
