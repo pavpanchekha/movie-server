@@ -1,11 +1,13 @@
 %def head():
     <link rel="stylesheet" href="/static/library.css" />
     <script src="/static/library.js"></script>
+    <script src="/static/touchswipe.js"></script>
 %end
 
 %rebase master title="Library", head=head
 
-<h1>Movies</h1>
+<section>
+<h1 title="Movies">Movies</h1>
 %for movie in movies:
   <div class="item">
     <div class="leftcol">
@@ -25,3 +27,4 @@
     </div>
   </div>
 %end for
+</section>

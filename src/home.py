@@ -20,7 +20,7 @@ def do_hegemony():
             heg_ctl.start(server)
         else:
             heg_ctl.stop(server)
-    return bottle.redirect("/current")
+    return bottle.redirect("/")
 
     
 @bottle.get("/movie/:id")
@@ -110,4 +110,4 @@ def current():
 
 if __name__ == "__main__":
     bottle.debug()
-    bottle.run(host="localhost", port=8080, reloader=True)
+    bottle.run(host="0.0.0.0", port=8080, reloader=True)

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>{{title}} &mdash; Whisnant</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="maximum-scale=1.0, initial-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="/static/main.css" />
     <link rel="apple-touch-icon-precomposed" href="/static/icon.png" />

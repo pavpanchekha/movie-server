@@ -1,11 +1,13 @@
 %def head():
     <link rel="stylesheet" href="/static/library.css" />
     <script src="/static/library.js"></script>
+    <script src="/static/touchswipe.js"></script>
 %end
 
 %rebase master title="Library", head=head
 
-<h1>Playlists</h1>
+<section>
+<h1 title="Playlists">Playlists</h1>
 %for playlist in playlists:
   <div class="item XXX">
       <form method="post" action="/playlist/{{playlist['id']}}">
@@ -30,3 +32,4 @@
     <h2>All Music</h2>
   </div>
 </div>
+</section>

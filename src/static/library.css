@@ -1,23 +1,22 @@
-
-@media all and (min-width: 475px) { /* Rotated */
-    div.item {
-        width: 48%;
-        float: left;
-        margin: .5% .5em;
-    }
-}
-
-@media all and (min-width: 600px) { /* Screen */
+@media all and (min-width: 800px) { /* Screen */
     div.item {
         width: 31.5% !important;
         margin: .5%;
+        float: left;
         overflow: hidden;
         max-height: 200px;
     }
 }
 
+section {
+    width: 100%;
+    float: left;
+    overflow-x: hidden;
+    min-height: 10em;
+}
+
 div.item {
-    padding: 10px 2px;
+    padding: 10px 0;
     min-height: 200px; /* Don't fight it, it's stronger than you... */
     margin: 0 .5em;
 }
@@ -53,7 +52,7 @@ div.item form .start {
 }
 
 div.rightcol {
-    margin-left: 115px; 
+    margin-left: 120px; 
 }
 
 div.item p.summary {

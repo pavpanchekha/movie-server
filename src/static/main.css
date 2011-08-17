@@ -1,27 +1,43 @@
 * {
     margin: 0;
     padding: 0;
+    z-index: 10;
 }
 
 body {
     color: white;
-    font-size: 14pt;
+    font-size: 11pt;
     font-family: 'Lucida Sans', 'Lucida Grande', sans-serif;
     background: black;
+    z-index: -1;
 }
 
 h1 {
      text-align: left;
-     margin-bottom: 5px;
-     font-size: 18pt;
-     height: 18pt;
+     margin: 5px;
+     font-size: 24pt;
      overflow: none;
      clear: both;
+     position: relative;
+}
+
+h1:after {
+     text-align: left;
+     margin: 5px;
+     font-size: 72pt;
+     opacity: .2;
+     overflow: none;
+     clear: both;
+     position: absolute;
+     z-index: 0;
+     content: attr(title);
+     left: -.3em;
+     top: -.4em;
 }
 
 h2 {
     text-align: left;
-    font-size: 15pt;
+    font-size: 14pt;
     margin-bottom: 5px;
 }
 
