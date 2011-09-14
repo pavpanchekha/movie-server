@@ -1,17 +1,13 @@
 function swipeLeft() {
-    if ($("section:visible").prev("section").length) {
-        $("section:visible").hide().prev("section").show(); 
-    }
+    $("#all").animate({left: "-100%"}, "fast");
 }
 
 function swipeRight() {
-    if ($("section:visible").next("section").length) {
-        $("section:visible").hide().next("section").show(); 
-    }
+    $("#all").animate({left: "0"}, "fast");
 }
 
 $(function () {
-    $("section").hide().last().show();
+    //$("section").hide().last().show();
     
     $(document).swipe({
         swipeLeft:  swipeLeft,
