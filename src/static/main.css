@@ -24,7 +24,7 @@ h1 {
 h1:after {
      text-align: left;
      margin: 5px;
-     font-size: 72pt;
+     font-size: 48pt;
      opacity: .2;
      overflow: none;
      clear: both;
@@ -51,6 +51,7 @@ h2 {
     position: absolute;
     bottom: 0px;
     width: 100%;
+    color: black;
     background: white;
 }
 
@@ -80,8 +81,8 @@ h2 {
 
 #hegemony input + label {
     margin: 0 10px;
-    padding-left: 50px;
     font-size: 15pt;
+    padding: 1pt 0 1pt 50px;
     background: url('/static/stop.png') no-repeat left center;
 }
 
