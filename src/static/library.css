@@ -40,7 +40,7 @@ div.item {
 }
 
 div.item.small {
-    min-height: 0;
+    min-height: 48px;
 }
 
 .leftcol {
