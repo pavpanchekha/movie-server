@@ -24,9 +24,9 @@ class MPDaemon(object):
     def __get_number(self):
         return int(self.__get_position().split("/")[0])
 
-    def current(self, id):
+    def info(self, id):
         if id != "*":
-            songs = get_output(["mpc", "lsplaylist", id, "-f", "%title%"]).strip().split("\n")
+            songs = get_output(["mpc", "playlist", id, "-f", "%title%"]).strip().split("\n")
         else:
             songs = get_output(["mpc", "listall", "-f", "%title%"]).strip().split("\n")
             
@@ -35,6 +35,9 @@ class MPDaemon(object):
                 "songs": enumerate(songs),
                 "position": self.__get_number(),
                 }
+
+    def current(self):
+        return "*"
 
     def library(self):
         playlists = self.__get_playlists()

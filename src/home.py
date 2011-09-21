@@ -27,7 +27,7 @@ def do_hegemony():
 @bottle.view("movie")
 def show_movie(id):
     mod = movie_ctl
-    return dict(item=mod.current(id),
+    return dict(item=mod.info(id),
                 name=id,
                 is_playing=mod.is_playing(),
                 hosts=config.HOSTS,
@@ -52,7 +52,7 @@ def post_movie(id):
 @bottle.view("playlist")
 def show_playlist(id):
     mod = song_ctl
-    return dict(item=mod.current(id),
+    return dict(item=mod.info(id),
                 name=id,
                 is_playing=mod.is_playing(),
                 hosts=config.HOSTS,
@@ -102,9 +102,9 @@ def static(filename):
 @bottle.get("/")
 def current():
     if movie_ctl.is_running():
-        return bottle.redirect("/movie")
+        return bottle.redirect("/movie/%s" % movie_ctl.current())
     elif song_ctl.is_running():
-        return bottle.redirect("/playlist")
+        return bottle.redirect("/playlist" % movie_ctl.current())
     else:
         return bottle.redirect("/library")
 

@@ -13,10 +13,10 @@ class MovieDir(object):
 
     def is_playing(self):
         return self.control.state["playing"]
-    
-    def current(self, id=None):
-        """Return information about the current movie"""
 
+    def info(self, id):
+        """Return information about a given id"""
+        
         curr = Movie(self.dir, id)
 
         return {
@@ -26,7 +26,12 @@ class MovieDir(object):
             "rating": curr.rating,
             "duration": curr.duration[1],
             }
+    
+    def current(self):
+        """Return the id of the current movie"""
 
+        return self.control.state["movie"]
+    
     def library(self):
         """Return list of available movies"""
 
