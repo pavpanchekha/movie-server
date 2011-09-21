@@ -26,7 +26,8 @@ class MPDaemon(object):
 
     def info(self, id):
         if id != "*":
-            songs = get_output(["mpc", "listall", id, "-f", "%title%"]).strip().split("\n")
+            # TODO: fixall
+            songs = get_output(["mpc", "listall", "-f", "%title%"]).strip().split("\n")
         else:
             songs = get_output(["mpc", "listall", "-f", "%title%"]).strip().split("\n")
             
