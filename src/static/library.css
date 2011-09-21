@@ -39,11 +39,11 @@ div.item {
     margin: 0 .5em;
 }
 
-div.item.XXX {
+div.item.small {
     min-height: 0;
 }
 
-div.leftcol {
+.leftcol {
     float: left;
     width: 110px;
     text-align: center;
@@ -69,7 +69,7 @@ div.item form .start {
     right: 2px;
 }
 
-div.rightcol {
+.rightcol {
     margin-left: 120px; 
 }
 
