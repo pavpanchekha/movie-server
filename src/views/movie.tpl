@@ -19,4 +19,4 @@
 </p>
 
 
-%include controls hosts=hosts, heg=heg, is_playing=is_playing, mod="playlist", name=name
+%include controls hosts=hosts, heg=heg, is_playing=is_playing, mod="movie", name=name
